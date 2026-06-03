@@ -1,0 +1,17 @@
+openai>=1.0
+datasets
+transformers>=4.40
+torch
+jsonschema
+pyyaml
+pandas
+scipy
+scikit-learn
+tiktoken
+tqdm
+psycopg2-binary
+fastapi
+uvicorn
+gitpython
+langchain-openai
+langgraph
