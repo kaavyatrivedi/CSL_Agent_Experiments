@@ -1,0 +1,3 @@
+Agents A07-08 use Aider. 
+Website/Documentation: https://aider.chat/docs/
+Git: https://github.com/aider-ai/aider
