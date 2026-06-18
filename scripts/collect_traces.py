@@ -3,7 +3,7 @@ Runs a simple GPT-4o agent on SWE-Bench tasks and records traces.
 Each trace captures: input, output, and whether output is well-formed.
 Reminder: When collecting  traces on a new agent, replace its system 
 prompt and trace files' titles in the code so it reads from and writes
-to the correct places.
+to the correct places. (Ctrl+F "A0", "A1", and "A2" to find all instances.)
 """
 
 import openai, json, time
@@ -13,7 +13,7 @@ load_dotenv()
 client = openai.OpenAI()
  
 # Load your system prompt for whichever agent's prompt is inputted
-with open('corpus/A01_system_prompt.txt') as f:
+with open('corpus/A03_system_prompt.txt') as f:
     system_prompt = f.read()
  
 # Load tasks
@@ -37,10 +37,11 @@ for task in tasks[:30]:   # start with 30
     output = response.choices[0].message.content
     
     # Check if output is well-formed (basic structural check)
-    is_valid_patch = output.strip().startswith('---') or '@@' in output
+    #is_valid_patch = output.strip().startswith('---') or '@@' in output
+    is_valid_patch = 'VERIFICATION RESULT:' in output and ('Verdict: PASS' in output or 'Verdict: FAIL' in output) #for A03
     
     traces.append({
-        'agent_id': 'A01',
+        'agent_id': 'A03',
         'task_id': task['instance_id'],
         'input': {'issue': issue_text, 'repo': repo},
         'output': output,
@@ -50,7 +51,7 @@ for task in tasks[:30]:   # start with 30
     print(f"Trace {len(traces)}/30 collected")
  
 # Save traces
-with open(f'corpus/A02_traces.json', 'w') as f:
+with open(f'corpus/A03_traces.json', 'w') as f:
     json.dump(traces, f, indent=2)
 print(f'Saved {len(traces)} traces')
 print(f'Success rate: {sum(t["post_satisfied"] for t in traces)/len(traces):.2%}')
