@@ -13,7 +13,7 @@ load_dotenv()
 client = openai.OpenAI()
  
 # Load your system prompt for whichever agent's prompt is inputted
-with open('corpus/A03_system_prompt.txt') as f:
+with open('corpus/A11_system_prompt.txt') as f:
     system_prompt = f.read()
  
 # Load tasks
@@ -34,24 +34,42 @@ for task in tasks[:30]:   # start with 30
         ],
         max_tokens=1000
     )
+    # A10: uses SWE-Bench patch field because its purpose 
+    # patch_text = task.get('patch', 'No patch provided')
+    # response = client.chat.completions.create(
+    #     model='gpt-4o',
+    #     messages=[
+    #         {'role': 'system', 'content': system_prompt},
+    #         {'role': 'user', 'content': f'Issue: {issue_text}\nRepo: {repo}\nPatch:\n{patch_text}'}
+    #     ],
+    #     max_tokens=1000
+    # )
+    
     output = response.choices[0].message.content
     
-    # Check if output is well-formed (basic structural check)
-    #is_valid_patch = output.strip().startswith('---') or '@@' in output
-    is_valid_patch = 'VERIFICATION RESULT:' in output and ('Verdict: PASS' in output or 'Verdict: FAIL' in output) #for A03
-    
+    # Check if output is well-formed (basic structural check). This varies based on the agent.
+
+    # is_valid_output = output.strip().startswith('---') or '@@' in output #A01, A02, A10, tests if valid patch
+    # is_valid_output = 'VERIFICATION RESULT:' in output and ('Verdict: PASS' in output or 'Verdict: FAIL' in output) #for A03, test cases
+    # is_valid_output = output.strip().startswith('FILE:') and '```' in output #A04, A06
+    # is_valid_output = output.strip().startswith('RELEVANT FILES:') #A05
+    # is_valid_output = '<<<<<<< SEARCH' in output and '>>>>>>> REPLACE' in output #A07, 08
+    # is_valid_output = output.strip().startswith('ROOT CAUSE ANALYSIS:') and 'Root cause location:' in output #A09
+    is_valid_output = (output.strip().startswith('---') or '@@' in output) and 'CONFLICT:' not in output or ('CONFLICT:' in output and 'Resolution required: manual' in output) #A11
+
+
     traces.append({
-        'agent_id': 'A03',
+        'agent_id': 'A11',
         'task_id': task['instance_id'],
         'input': {'issue': issue_text, 'repo': repo},
         'output': output,
-        'post_satisfied': is_valid_patch,   # True = postcondition met
+        'post_satisfied': is_valid_output,   # True = postcondition met
     })
     time.sleep(1)  # avoid rate limits
     print(f"Trace {len(traces)}/30 collected")
  
 # Save traces
-with open(f'corpus/A03_traces.json', 'w') as f:
+with open(f'corpus/A11_traces.json', 'w') as f:
     json.dump(traces, f, indent=2)
 print(f'Saved {len(traces)} traces')
 print(f'Success rate: {sum(t["post_satisfied"] for t in traces)/len(traces):.2%}')
