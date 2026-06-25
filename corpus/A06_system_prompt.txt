@@ -27,3 +27,5 @@ Your output must follow this exact format:
 
 FILE: <relative/path/to/test_file.py>
 Do not include explanation outside of code comments. Do not modify the function under test.
+
+IMPORTANT: Your response must begin with FILE: as the very first characters. No preamble, no greeting, no explanation before the FILE: header.

@@ -6,14 +6,14 @@ prompt and trace files' titles in the code so it reads from and writes
 to the correct places. (Ctrl+F "A0", "A1", and "A2" to find all instances.)
 """
 
-import openai, json, time
+import openai, json, time, re
 from dotenv import load_dotenv
 load_dotenv()
  
 client = openai.OpenAI()
  
 # Load your system prompt for whichever agent's prompt is inputted
-with open('corpus/A11_system_prompt.txt') as f:
+with open('corpus/A05_system_prompt.txt') as f:
     system_prompt = f.read()
  
 # Load tasks
@@ -25,7 +25,7 @@ for task in tasks[:30]:   # start with 30
     issue_text = task['problem_statement']
     repo = task['repo']
     
-    # Call the agent
+    # Call the agent - basic response
     response = client.chat.completions.create(
         model='gpt-4o',
         messages=[
@@ -34,7 +34,8 @@ for task in tasks[:30]:   # start with 30
         ],
         max_tokens=1000
     )
-    # A10: uses SWE-Bench patch field because its purpose 
+
+    # A10, 14: uses SWE-Bench patch field as code to refer to
     # patch_text = task.get('patch', 'No patch provided')
     # response = client.chat.completions.create(
     #     model='gpt-4o',
@@ -45,21 +46,36 @@ for task in tasks[:30]:   # start with 30
     #     max_tokens=1000
     # )
     
+    # A12: uses SWE-Bench patch and test file references
+    # patch_text = task.get('patch', 'No patch provided')
+    # test_text = task.get('test_patch', 'No test suite provided')
+    # response = client.chat.completions.create(
+    #     model='gpt-4o',
+    #     messages=[
+    #         {'role': 'system', 'content': system_prompt},
+    #         {'role': 'user', 'content': f'Issue: {issue_text}\nRepo: {repo}\nPatch:\n{patch_text}\nTest suite:\n{test_text}'}
+    #     ],
+    #     max_tokens=1000
+    # )
+    
     output = response.choices[0].message.content
     
     # Check if output is well-formed (basic structural check). This varies based on the agent.
 
-    # is_valid_output = output.strip().startswith('---') or '@@' in output #A01, A02, A10, tests if valid patch
+    # is_valid_output = output.strip().startswith('LOCALISATION RESULT:') and 'File:' in output and 'Reason:' in output #A01
+    # is_valid_output = output.strip().startswith('---') or '@@' in output #A02, A10, tests if valid patch
     # is_valid_output = 'VERIFICATION RESULT:' in output and ('Verdict: PASS' in output or 'Verdict: FAIL' in output) #for A03, test cases
     # is_valid_output = output.strip().startswith('FILE:') and '```' in output #A04, A06
-    # is_valid_output = output.strip().startswith('RELEVANT FILES:') #A05
-    # is_valid_output = '<<<<<<< SEARCH' in output and '>>>>>>> REPLACE' in output #A07, 08
+    is_valid_output = output.strip().startswith('RELEVANT FILES:') #A05
+    # is_valid_output = bool(re.search(r'<{3,} SEARCH', output)) and bool(re.search(r'>{3,} REPLACE', output)) #A07, 08
     # is_valid_output = output.strip().startswith('ROOT CAUSE ANALYSIS:') and 'Root cause location:' in output #A09
-    is_valid_output = (output.strip().startswith('---') or '@@' in output) and 'CONFLICT:' not in output or ('CONFLICT:' in output and 'Resolution required: manual' in output) #A11
-
+    # is_valid_output = (output.strip().startswith('---') or '@@' in output) and 'CONFLICT:' not in output or ('CONFLICT:' in output and 'Resolution required: manual' in output) #A11
+    # is_valid_output = output.strip().startswith('TEST RUN REPORT:') and 'Overall verdict:' in output and 'Results:' in output #A12
+    # is_valid_output = output.strip().startswith('ISSUE PARSE RESULT:') and 'Affected components:' in output and 'Expected behaviour:' in output #A13
+    # is_valid_output = output.strip().startswith('CODE SUMMARY:') and 'Purpose:' in output and 'Inputs:' in output and 'Outputs:' in output #A14
 
     traces.append({
-        'agent_id': 'A11',
+        'agent_id': 'A05',
         'task_id': task['instance_id'],
         'input': {'issue': issue_text, 'repo': repo},
         'output': output,
@@ -69,7 +85,7 @@ for task in tasks[:30]:   # start with 30
     print(f"Trace {len(traces)}/30 collected")
  
 # Save traces
-with open(f'corpus/A11_traces.json', 'w') as f:
+with open(f'corpus/A05_traces.json', 'w') as f:
     json.dump(traces, f, indent=2)
 print(f'Saved {len(traces)} traces')
 print(f'Success rate: {sum(t["post_satisfied"] for t in traces)/len(traces):.2%}')
