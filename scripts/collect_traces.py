@@ -11,13 +11,14 @@ from dotenv import load_dotenv
 load_dotenv()
  
 client = openai.OpenAI()
- 
-# Load your system prompt for whichever agent's prompt is inputted
-with open('corpus/A05_system_prompt.txt') as f:
+
+# Load your system prompt for whichever agent is inputted
+# Many modern system prompts require UTF-8 decoding because they use Markdown format
+with open('corpus/A20_system_prompt.txt', encoding='utf-8') as f:
     system_prompt = f.read()
- 
-# Load tasks
-with open('corpus/swebench_tasks_30.json') as f:
+
+# Load tasks ( good practice to add it here too)
+with open('corpus/swebench_tasks_30.json', encoding='utf-8') as f:
     tasks = json.load(f)
  
 traces = []
@@ -66,16 +67,24 @@ for task in tasks[:30]:   # start with 30
     # is_valid_output = output.strip().startswith('---') or '@@' in output #A02, A10, tests if valid patch
     # is_valid_output = 'VERIFICATION RESULT:' in output and ('Verdict: PASS' in output or 'Verdict: FAIL' in output) #for A03, test cases
     # is_valid_output = output.strip().startswith('FILE:') and '```' in output #A04, A06
-    is_valid_output = output.strip().startswith('RELEVANT FILES:') #A05
+    # is_valid_output = output.strip().startswith('RELEVANT FILES:') #A05
     # is_valid_output = bool(re.search(r'<{3,} SEARCH', output)) and bool(re.search(r'>{3,} REPLACE', output)) #A07, 08
     # is_valid_output = output.strip().startswith('ROOT CAUSE ANALYSIS:') and 'Root cause location:' in output #A09
     # is_valid_output = (output.strip().startswith('---') or '@@' in output) and 'CONFLICT:' not in output or ('CONFLICT:' in output and 'Resolution required: manual' in output) #A11
     # is_valid_output = output.strip().startswith('TEST RUN REPORT:') and 'Overall verdict:' in output and 'Results:' in output #A12
     # is_valid_output = output.strip().startswith('ISSUE PARSE RESULT:') and 'Affected components:' in output and 'Expected behaviour:' in output #A13
     # is_valid_output = output.strip().startswith('CODE SUMMARY:') and 'Purpose:' in output and 'Inputs:' in output and 'Outputs:' in output #A14
+    # is_valid_output = '```' in output and ('tsx' in output or 'jsx' in output or 'typescript' in output) #A15
+    # is_valid_output = '```' in output and ('function' in output or 'const ' in output or 'import ' in output) #A16
+    # is_valid_output = '```' in output and ('import ' in output or 'require(' in output) #A17
+    # is_valid_output = '```' in output and ('className' in output or 'import ' in output) #A18
+    # is_valid_output = 'THE SYSTEM SHALL' in output or ('requirements' in output.lower() and '##' in output) #A19
+    is_valid_output = '```' in output and ('bash' in output or '```sh' in output or '$' in output) #A20
+
+
 
     traces.append({
-        'agent_id': 'A05',
+        'agent_id': 'A20',
         'task_id': task['instance_id'],
         'input': {'issue': issue_text, 'repo': repo},
         'output': output,
@@ -85,7 +94,7 @@ for task in tasks[:30]:   # start with 30
     print(f"Trace {len(traces)}/30 collected")
  
 # Save traces
-with open(f'corpus/A05_traces.json', 'w') as f:
+with open(f'corpus/A20_traces.json', 'w') as f:
     json.dump(traces, f, indent=2)
 print(f'Saved {len(traces)} traces')
 print(f'Success rate: {sum(t["post_satisfied"] for t in traces)/len(traces):.2%}')
