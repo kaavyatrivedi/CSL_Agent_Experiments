@@ -1,0 +1,45 @@
+# Template
+contract_id: A01-localiser-v1.0
+agent_name: SWE-agent Localiser
+description: 'Identifies the buggy file from a GitHub issue description'
+ 
+tin:                          # What the agent ACCEPTS as input
+  type: object
+  properties:
+    issue:                    # Field name
+      type: string            # Must be a string
+      semantic: '@valid_github_issue'   # Meaningful issue, not empty
+    repo:
+      type: string
+      format: uri             # Must be a URL
+  required: [issue, repo]     # Both fields are mandatory
+ 
+pre:                          # When is it SAFE to call this agent?
+  structural: 'issue != null and repo != null'
+  semantic:
+    - '@issue_has_enough_context'   # Issue has reproducible info
+ 
+post:                         # What must be TRUE about the output?
+  structural: 'output.file != null'
+  semantic:
+    - '@output_file_exists_in_repo'   # The file it mentions actually exists
+ 
+tout:                         # What the agent PRODUCES as output
+  type: object
+  properties:
+    file: {type: string}
+    line: {type: integer}
+    confidence: {type: number, minimum: 0, maximum: 1}
+ 
+prob:
+  satisfaction_rate: 0.XX     # Fill from traces: successes / total
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
+    mu: X.X
+    sigma: X.X
+  p95_latency_ms: XXXX        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'
