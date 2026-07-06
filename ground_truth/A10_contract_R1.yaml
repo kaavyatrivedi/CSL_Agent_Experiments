@@ -1,0 +1,41 @@
+# Template
+contract_id: A10-patchreviewer-v1.0
+agent_name: Custom PatchReviewer
+description: ‘Reviews patches for logical correctness’
+ 
+tin:                          # What the agent ACCEPTS as input
+  type: object
+  properties:
+    patch:   
+      type: string      
+    repo:
+      type: string
+      format: uri  
+  required: [patch, repo]     # Both fields are mandatory
+ 
+pre:                          # When is it SAFE to call this agent?
+  structural: 'patch != null and repo != null'
+  semantic:
+    - '@input_has_file_location' 
+ 
+post:  # What must be TRUE about the output?
+  structural: "output.startswith('---') or '@@' in output"
+  semantic:
+    - '@output_is_valid_patch' 
+ 
+tout:                         # What the agent PRODUCES as output
+  type: string    # Output: raw text diff
+
+ 
+prob:
+  satisfaction_rate: 0.9333     # Fill from traces: successes / total
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
+    mu: 0.0
+    sigma: 0.0
+  p95_latency_ms: 0.0        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'

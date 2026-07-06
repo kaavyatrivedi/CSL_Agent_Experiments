@@ -1,0 +1,39 @@
+# Template
+contract_id: A07-refactor-v1.0
+agent_name: Aider Refactor
+description: ‘Refactors code to match instructions’
+ 
+tin:                          # What the agent ACCEPTS as input
+  type: object
+  properties:
+    code: 
+      type: string            
+    instructions:
+      type: string
+  required: [code, instructions]     # Both fields are mandatory
+ 
+pre:                          # When is it SAFE to call this agent?
+  structural: 'code != null and instructions != null and len(instructions) > 0'
+  semantic:
+    - '@input_is_code_and_instructions'
+ 
+post:                         # What must be TRUE about the output?
+  structural: "'<<<' in output and '>>>' in output"
+  semantic:
+    - '@output_is_search_replace_block' 
+ 
+tout:                         # What the agent PRODUCES as output
+  type: string # search/replace block
+ 
+prob:
+  satisfaction_rate: 0.533     # Fill from traces: successes / total
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
+    mu: 0.0
+    sigma: 0.0
+  p95_latency_ms: 0.0        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'

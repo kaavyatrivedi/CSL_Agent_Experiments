@@ -8,11 +8,11 @@ agent_name: EnterFromTable1
 description: 'EnterFromTable1'
  
 tin:  # What the agent ACCEPTS as input
-  type: object
-  properties:
-    issue:                    # Field name
-      type: string            # Must be a string
-      semantic: '@valid_github_issue'   # ENTER YOURS! 
+  type: object # DO NOT CHANGE.
+  properties: # DO NOT CHANGE.
+    issue:  # Field name
+      type: string   # Defines the field's type
+      semantic: '@valid_github_issue'  # Defines the field's semantic.
     repo:
       type: string
       format: uri             # Must be a URL

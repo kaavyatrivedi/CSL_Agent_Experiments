@@ -33,7 +33,7 @@ tout:                         # What the agent PRODUCES as output
     reason: {type: string}
  
 prob:
-  satisfaction_rate: 0.1     # Fill from traces: successes / total
+  satisfaction_rate: 1.0     # Fill from traces: successes / total
   confidence_delta: 0.05
   min_sample_k: 30
   latency_lognormal:          # Fill from traces: compute mean/std of log(latency)

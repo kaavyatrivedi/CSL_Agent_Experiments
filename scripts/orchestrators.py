@@ -101,6 +101,7 @@ def check_pre_compatibility(subtask_desc, contract):
             ['terminal', 'bash', 'shell', 'script', 'command',
             'cli', 'warp'],                                                  # A20
 
+
         # Post-condition predicates
         # These are NOT used by check_pre_compatibility. They go to the
         # Tier 2 GPT-4o-mini classifier, which converts them to natural
