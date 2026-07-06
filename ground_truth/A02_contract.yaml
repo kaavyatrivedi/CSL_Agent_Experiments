@@ -1,0 +1,49 @@
+# This is the template for agent annotating. ENTER YOURS means you come up with your own fields
+# and predicate and enter them; ENTER FROM TABLE means to use the provided data in the instructions
+# document. Please refer to that document for more detailed instructions.
+
+# ID info. ENTER FROM TABLE 1.
+contract_id: AXX-title-v1.0
+agent_name: EnterFromTable1
+description: 'EnterFromTable1'
+ 
+tin:  # What the agent ACCEPTS as input
+  type: object
+  properties:
+    issue:                    # Field name
+      type: string            # Must be a string
+      semantic: '@valid_github_issue'   # ENTER YOURS! 
+    repo:
+      type: string
+      format: uri             # Must be a URL
+  required: [issue, repo]     # Both fields are mandatory
+ 
+pre:  # ENTER YOURS. When is it SAFE to call this agent?
+  structural: 'issue != null and repo != null' 
+  semantic:
+    - '@issue_has_enough_context' 
+ 
+post:  # ENTER YOURS.  What must be TRUE about the output? Refer to is_valid_output fields in collect_traces.py.
+  structural: 'output.file != null' 
+  semantic:
+    - '@output_is_localisation_result' 
+ 
+tout:  # ENTER YOURS. What the agent PRODUCES as output. Refer to postcondition and agent's role.
+  type: object
+  properties:
+    file: {type: string}
+    line: {type: integer}
+    confidence: {type: number, minimum: 0, maximum: 1}
+ 
+prob:
+  satisfaction_rate: 0.XX     # ENTER FROM TABLE 2. Only this field; do not change any below.
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Was not recorded, all considered 0.
+    mu: 0
+    sigma: 0
+  p95_latency_ms: 0        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'

@@ -15,14 +15,14 @@ tin:                          # What the agent ACCEPTS as input
   required: [issue, repo]     # Both fields are mandatory
  
 pre:                          # When is it SAFE to call this agent?
-  structural: 'issue != null and repo != null'
+  structural: 'issue != null and repo != null and len(issue) > 0'
   semantic:
-    - '@issue_has_enough_context'   # Issue has reproducible info
+    - '@input_is_github_issue'   # Issue has reproducible info
  
 post:                         # What must be TRUE about the output?
-  structural: 'output.file != null'
+  structural: "output.startswith('LOCALISATION RESULT:') and 'File:' in output and 'Reason:' in output"
   semantic:
-    - '@output_file_exists_in_repo'   # The file it mentions actually exists
+    - '@output_is_localisation_result'   # The file it mentions actually exists
  
 tout:                         # What the agent PRODUCES as output
   type: object
@@ -30,15 +30,16 @@ tout:                         # What the agent PRODUCES as output
     file: {type: string}
     line: {type: integer}
     confidence: {type: number, minimum: 0, maximum: 1}
+    reason: {type: string}
  
 prob:
-  satisfaction_rate: 0.XX     # Fill from traces: successes / total
+  satisfaction_rate: 0.1     # Fill from traces: successes / total
   confidence_delta: 0.05
   min_sample_k: 30
   latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
-    mu: X.X
-    sigma: X.X
-  p95_latency_ms: XXXX        # 95th percentile from traces
+    mu: 0.0
+    sigma: 0.0
+  p95_latency_ms: 0.0        # 95th percentile from traces
  
 comp:
   type: SELECT                # How to combine outputs if run in parallel
