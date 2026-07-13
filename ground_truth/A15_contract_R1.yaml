@@ -1,0 +1,39 @@
+# Template
+contract_id: A15-v0-v1.0
+agent_name: v0
+description: ‘UI generation agent, generates React components’
+ 
+tin:                          # What the agent ACCEPTS as input
+  type: object
+  properties:
+    description: 
+      type: string
+      semantic: '@valid_ui_description'
+  required: [description]    
+ 
+pre:                          # When is it SAFE to call this agent?
+  structural: 'description != null and len(description) > 0'
+  semantic:
+    - '@input_is_ui_description'
+ 
+post:  # What must be TRUE about the output?
+  structural: "'```' in output and ('tsx' in output or 'jsx' in output or 'typescript' in output)"
+  semantic:
+    - '@output_is_react_component' 
+ 
+tout:                         # What the agent PRODUCES as output
+  type: string #jsx/tsx block
+
+ 
+prob:
+  satisfaction_rate: 0.8333     # Fill from traces: successes / total
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
+    mu: 0.0
+    sigma: 0.0
+  p95_latency_ms: 0.0        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'

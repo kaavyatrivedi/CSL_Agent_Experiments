@@ -1,0 +1,39 @@
+# Template
+contract_id: A19-kiro-v1.0
+agent_name: Kiro
+description: ‘Writes spec then produces code’
+ 
+tin:                          # What the agent ACCEPTS as input
+  type: object
+  properties:
+    description: 
+      type: string
+      semantic: '@valid_feature_description'
+  required: [description]    
+ 
+pre:                          # When is it SAFE to call this agent?
+  structural: 'description != null and len(description) > 0'
+  semantic:
+    - '@input_is_feature_description'
+ 
+post:  # What must be TRUE about the output?
+  structural: "'THE SYSTEM SHALL' in output or ('requirements' in output and '##' in output)"
+  semantic:
+    - '@output_is_requirements_spec' 
+ 
+tout:                         # What the agent PRODUCES as output
+  type: string # requirements spec  
+
+ 
+prob:
+  satisfaction_rate: 1.0     # Fill from traces: successes / total
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
+    mu: 0.0
+    sigma: 0.0
+  p95_latency_ms: 0.0        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'

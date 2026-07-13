@@ -1,0 +1,39 @@
+# Template
+contract_id: A20-warpdev-v1.0
+agent_name: Warp.dev
+description: ‘Terminal-based implementer’
+ 
+tin:                          # What the agent ACCEPTS as input
+  type: object
+  properties:
+    task: 
+      type: string
+      semantic: '@valid_terminal_task'
+  required: [task]    
+ 
+pre:                          # When is it SAFE to call this agent?
+  structural: 'task != null and len(task) > 0'
+  semantic:
+    - '@input_is_terminal_task'
+ 
+post:  # What must be TRUE about the output?
+  structural: "'```' in output and ('bash' in output or '```sh' in output or '$' in output)"
+  semantic:
+    - '@output_is_shell_script' 
+ 
+tout:                         # What the agent PRODUCES as output
+  type: string # shell script  
+
+ 
+prob:
+  satisfaction_rate: 0.7333     # Fill from traces: successes / total
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
+    mu: 0.0
+    sigma: 0.0
+  p95_latency_ms: 0.0        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'

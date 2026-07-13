@@ -1,0 +1,45 @@
+# Template
+contract_id: A12-testrunner-v1.0
+agent_name: Custom TestRunner
+description: ‘Executes test suite and parses results’
+ 
+tin:                          # What the agent ACCEPTS as input
+  type: object
+  properties:
+    test_suite: 
+      type: string            
+    repo:
+      type: string
+      format: uri
+  required: [test_suite, repo]     # Both fields are mandatory
+ 
+pre:                          # When is it SAFE to call this agent?
+  structural: 'test_suite != null and repo != null'
+  semantic:
+    - '@input_is_test_suite'
+ 
+post:  # What must be TRUE about the output?
+  structural: "output.startswith('TEST RUN REPORT:') and 'Overall verdict:' in output and 'Results:' in output"
+  semantic:
+    - '@output_is_test_run_report' 
+ 
+tout:                         # What the agent PRODUCES as output
+  type: object
+  properties:
+    verdict: {type: string}
+    results: {type: array}
+    summary: {type: string}
+
+ 
+prob:
+  satisfaction_rate: 1.0     # Fill from traces: successes / total
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
+    mu: 0.0
+    sigma: 0.0
+  p95_latency_ms: 0.0        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'

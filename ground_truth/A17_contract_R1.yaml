@@ -1,0 +1,39 @@
+# Template
+contract_id: A17-replit-v1.0
+agent_name: Replit
+description: ‘Builds and runs apps in sandbox environment’
+ 
+tin:                          # What the agent ACCEPTS as input
+  type: object
+  properties:
+    spec: 
+      type: string
+      semantic: '@valid_runnable_app_spec'
+  required: [spec]    
+ 
+pre:                          # When is it SAFE to call this agent?
+  structural: 'spec != null and len(spec) > 0'
+  semantic:
+    - '@input_is_runnable_app_spec'
+ 
+post:  # What must be TRUE about the output?
+  structural: "'```' in output and ('import ' in output or 'require(' in output)"
+  semantic:
+    - '@output_is_runnable_code' 
+ 
+tout:                         # What the agent PRODUCES as output
+  type: string # runnable code block
+
+ 
+prob:
+  satisfaction_rate: 0.5     # Fill from traces: successes / total
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
+    mu: 0.0
+    sigma: 0.0
+  p95_latency_ms: 0.0        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'

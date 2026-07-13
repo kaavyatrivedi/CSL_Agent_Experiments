@@ -1,0 +1,39 @@
+# Template
+contract_id: A16-lovable-v1.0
+agent_name: Lovable
+description: ‘Creates full web apps from natural language’
+ 
+tin:                          # What the agent ACCEPTS as input
+  type: object
+  properties:
+    description: 
+      type: string
+      semantic: '@valid_app_description'
+  required: [description]    
+ 
+pre:                          # When is it SAFE to call this agent?
+  structural: 'description != null and len(description) > 0'
+  semantic:
+    - '@input_is_app_description'
+ 
+post:  # What must be TRUE about the output?
+  structural: "'```' in output and ('function' in output or 'const ' in output or 'import ' in output)"
+  semantic:
+    - '@output_is_web_app_code' 
+ 
+tout:                         # What the agent PRODUCES as output
+  type: string #javascript/typescript code block
+
+ 
+prob:
+  satisfaction_rate: 0.4     # Fill from traces: successes / total
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:          # Fill from traces: compute mean/std of log(latency)
+    mu: 0.0
+    sigma: 0.0
+  p95_latency_ms: 0.0        # 95th percentile from traces
+ 
+comp:
+  type: SELECT                # How to combine outputs if run in parallel
+  scoring_fn: '@highest_confidence'
