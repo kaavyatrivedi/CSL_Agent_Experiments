@@ -22,13 +22,15 @@ pre:  # ENTER YOURS. When is it SAFE to call this agent?
   structural: 'issue != null and repo != null' 
   semantic:
     - '@issue_has_enough_context' 
+
+# For both post and tout, refer to is_valid_output fields in collect_traces.py.
  
-post:  # ENTER YOURS.  What must be TRUE about the output? Refer to is_valid_output fields in collect_traces.py.
+post:  # ENTER YOURS.  What must be TRUE about the output? 
   structural: 'output.file != null' 
   semantic:
     - '@output_is_localisation_result' 
  
-tout:  # ENTER YOURS. What the agent PRODUCES as output. Refer to postcondition and agent's role.
+tout:  # ENTER YOURS. What the agent PRODUCES as output.
   type: object
   properties:
     file: {type: string}
