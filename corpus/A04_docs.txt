@@ -1,0 +1,32 @@
+OpenHands — Agent SDK
+
+CONSTRUCTION
+An Agent is built from:
+  llm: model configuration
+  tools: list of tool definitions (e.g. TerminalTool, FileEditorTool)
+
+INPUT
+At runtime, the agent consumes an ordered event history (conversation
+state), not a single request/response pair.
+
+STRUCTURAL PRECONDITION ON INPUT
+A SystemPromptEvent must appear within the first two events. A user
+message must never precede the system prompt event. This ordering is
+enforced by the framework, not just convention.
+
+OUTPUT / EXECUTION MODEL
+Each step() call performs one LLM call, executes the resulting tool
+call, and mutates the conversation state in place (adds the assistant
+turn and tool result). Execution status is set to FINISHED when the
+conversation is complete; otherwise the caller invokes step() again.
+Output is therefore an incremental state mutation, not a single
+terminal artifact — evaluate final results after the full sequence of
+step() calls, not after any individual call.
+
+CONSTRAINT ON COMPOSITION
+tools are fixed for the life of a conversation and cannot be swapped
+mid-session — they are baked into the system prompt. Changing tools
+requires starting a new conversation or forking the existing one.
+
+OTHER CONFIGURATION (can vary freely between sessions, unlike tools)
+  agent_context, condenser, critic, mcp_config, filter_tools_regex

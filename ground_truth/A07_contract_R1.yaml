@@ -21,6 +21,7 @@ post:                         # What must be TRUE about the output?
   structural: "'<<<' in output and '>>>' in output"
   semantic:
     - '@output_is_search_replace_block' 
+    - '@output_has_filepath_before_block'
  
 tout:                         # What the agent PRODUCES as output
   type: string # search/replace block

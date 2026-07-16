@@ -1,0 +1,64 @@
+Warp — Local Agent Mode
+
+INTERACTION MODEL
+Embedded in a terminal session. Input can be a natural-language request
+or a literal shell command; Warp auto-detects which one was intended
+(configurable, can be overridden). No formal external request/response
+API is documented for local Agent Mode — it's an interactive product,
+not something called programmatically.
+
+INPUT ("tin", informal)
+  - A conversation is a sequence of natural-language queries plus the
+    resulting command "blocks." Follow-up queries continue the same
+    conversation by default; a new conversation starts automatically if
+    3 hours pass with no activity, or if a shell command intervenes.
+  - Auto-detection can be toggled separately for terminal-mode input vs
+    agent-conversation-view input; forcible override via `!` prefix
+    (force shell) or `/agent`, `/new` (force agent).
+  - Context is pulled automatically from "Warp Drive" objects: saved
+    Workflows, Notebooks, Environment Variables, Rules, and configured
+    MCP servers — these appear as citations in the response.
+
+PERMISSION MODEL (a real, checkable precondition on which actions can
+execute without user approval)
+  Agent profiles set permission level; named presets include:
+    Default   — balanced permissions for everyday use
+    YOLO mode — loose permissions, agent acts with minimal approval
+    Prod mode — restrictive, "Always Ask" on every action; intended for
+                high-risk environments like production servers
+  For Full Terminal Use specifically (agent attached to a live PTY
+  session, e.g. a database shell or REPL), write-permission has two
+  documented modes:
+    "Ask on first write" — first write to a given process requires
+      approval; subsequent writes to that same process are then
+      auto-approved for the rest of the session
+    "Always ask" — every write requires explicit approval, no
+      auto-approval accrual
+
+OUTPUT ("tout")
+  Warp's core primitive is the "block": each executed command is
+  packaged with its command text, output, exit code, duration, and a
+  stable ID. This is the closest thing to a structured output unit in
+  local Agent Mode — postcondition checks can reasonably key off a
+  block's exit code.
+  For Full Terminal Use sessions (interactive tools like psql, vim,
+  gdb, dev servers), output is the live terminal buffer itself, which
+  the agent reads and can act on continuously rather than receiving one
+  discrete result per turn.
+
+BEHAVIOR (relevant to pre/post semantics)
+  - If a command fails or is invalid, the agent attempts to diagnose and
+    correct the error, retrying until the task succeeds or it's blocked
+    by a permission gate.
+  - Control can be handed back and forth: "Takeover" stops the agent
+    from issuing further PTY writes until control is explicitly returned.
+
+MODEL CHOICE (comp-relevant)
+  Multiple LLM providers available (Anthropic, OpenAI, Google,
+  Fireworks-hosted); can be pinned per Agent Profile or set to an
+  auto-routing mode (auto, auto-efficient, auto-genius, auto-open).
+
+DATA HANDLING
+  Warp states it is SOC 2 compliant with Zero Data Retention agreements
+  with contracted LLM providers — no customer AI data is retained,
+  stored, or used for training, per Warp's own documentation.

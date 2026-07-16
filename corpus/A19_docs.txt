@@ -1,0 +1,84 @@
+Kiro — Specs, Steering, and Hooks
+
+OVERVIEW
+Kiro is an agentic IDE (VS Code-based) built on Amazon Bedrock, using
+multiple underlying foundation models. Three subsystems structure how
+the agent receives input and constrains its behavior: Specs (structured
+task definition), Steering (persistent context/rules), and Hooks
+(event-triggered automation).
+
+1. SPECS — structured tin for feature/bugfix work
+   Three-phase workflow, each phase producing a file:
+     requirements.md (or bugfix.md) — user stories and acceptance
+       criteria in EARS notation for features; for bugfixes, a
+       structured current/expected/unchanged-behavior analysis
+     design.md — technical architecture, data flow diagrams, interfaces,
+       schemas
+     tasks.md — sequenced, discrete, trackable implementation tasks
+   Two workflow modes:
+     Requirements-First or Design-First (features): approval gates
+       between phases, human reviews before proceeding
+     one-pass mode: generates requirements, design, and tasks together
+       without approval gates
+   Structural precondition: Kiro asks whether the work is a "Feature" or
+   a "Bug" before starting, which determines which artifact format
+   (requirements.md vs bugfix.md) is produced.
+
+2. STEERING — persistent context injected into every interaction (pre)
+   Two default foundation files, generated automatically:
+     tech.md — frameworks, libraries, tools, technical constraints;
+       biases Kiro toward the established stack over alternatives
+     structure.md — file organization, naming conventions, import
+       patterns, architectural decisions
+   Custom steering files support three inclusion modes, set via YAML
+   front matter at the top of the file:
+     always — loaded into every interaction (default foundation files
+       use this)
+     fileMatch — auto-included only when working with files matching a
+       specified pattern
+     manual — included only when explicitly invoked via # or / in chat
+   Scope: workspace-level (.kiro/steering/, applies to one project) or
+   global (~/.kiro/steering/, applies to all projects). On conflict,
+   workspace steering overrides global steering.
+   Also supports the AGENTS.md standard as an alternative steering input.
+
+3. HOOKS — event-triggered automated actions (comp: agent + external
+   command composition)
+   Stored as JSON at .kiro/hooks/ (workspace-level). Schema:
+     version: string ("v1")
+     hooks: array of:
+       name (string, required) — identifier shown in telemetry
+       description (string, optional) — documentation only
+       trigger (string, required) — event that fires the hook
+       matcher (regex string, optional, default: match-all) — filters
+         by tool name or file path depending on trigger type
+       action (object, required) — either
+         { type: "command", command: "<shell command>" } or
+         { type: "agent", prompt: "<natural language prompt>" }
+       timeout (integer seconds, optional, default 60; 0 disables;
+         ignored for agent actions)
+       enabled (boolean, optional, default true)
+
+   TRIGGER TYPES (subset — see full trigger reference for all):
+     SessionStart — session begins; cannot block
+     Stop — agent completes its turn; cannot block
+     PreToolUse — before a tool executes; matches tool name; CAN block
+     PostToolUse — after a tool executes; matches tool name; cannot block
+     PreTaskExec — before a spec task starts; CAN block
+     PostTaskExec — after a spec task finishes; cannot block
+     UserPromptSubmit — user submits a prompt; CAN block
+     PostFileCreate / PostFileSave / PostFileDelete — after the agent
+       creates/saves/deletes a file; matches file path; cannot block
+
+   EXIT CODE BEHAVIOR for command actions (real postcondition contract):
+     0  — success; stdout added to context for SessionStart/
+          UserPromptSubmit, ignored for other triggers
+     2  — blocks execution (only meaningful for PreToolUse,
+          UserPromptSubmit, PreTaskExec); stderr is returned to the agent
+     other — a warning is shown to the user, but tool execution proceeds
+             anyway (i.e., a nonzero non-2 exit code does NOT block)
+
+AVAILABILITY
+  Kiro runs as a desktop IDE, CLI, or web interface. No AWS account is
+  required to use it; sign-in via GitHub, Google, AWS Builder ID, or AWS
+  IAM Identity Center.

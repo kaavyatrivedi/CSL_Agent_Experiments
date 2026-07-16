@@ -1,0 +1,64 @@
+SWE-agent — Agent Configuration Reference
+
+Three agent config classes exist, all pydantic models with extra="forbid"
+(no undeclared fields permitted — a hard structural constraint on tin).
+
+1. DefaultAgentConfig — the standard agent
+   Fields:
+     name: str = "main"
+     templates: TemplateConfig       (system/instance/next-step prompt templates)
+     tools: ToolConfig               (tool bundles + env vars + parser type)
+     history_processors: list[HistoryProcessor]
+     model: ModelConfig
+     max_requeries: int = 3          # retries after a formatting error,
+                                      # blocked action, or bash syntax error
+     action_sampler: ActionSamplerConfig | None = None
+     type: Literal["default"] = "default"
+
+2. RetryAgentConfig — "meta agent," instantiates multiple DefaultAgentConfig
+   attempts and selects the best solution
+   Fields:
+     name: str = "retry_main"
+     agent_configs: list[DefaultAgentConfig]
+     retry_loop: RetryLoopConfig
+     type: Literal["retry"] = "retry"
+
+3. ShellAgentConfig — experimental, human-in-the-loop interactive mode
+   (invoked via `sweagent sh`), not for unattended batch runs
+   Fields: same as DefaultAgentConfig minus action_sampler
+     name: str = "main"
+     templates: TemplateConfig
+     tools: ToolConfig
+     history_processors: list[HistoryProcessor]
+     model: ModelConfig
+     max_requeries: int = 3
+     type: Literal["shell"] = "shell"
+
+TEMPLATE STRUCTURE (governs actual tin content sent to the underlying LLM)
+  system_template: static instructions, e.g. "You are a helpful assistant
+    that can interact with a computer to solve tasks."
+  instance_template: per-task prompt, built from placeholders including
+    {{working_dir}} (path to the cloned repo) and {{problem_statement}}
+    (the PR/issue description). The default template explicitly instructs
+    the agent NOT to modify test files, stating that test-file changes
+    have already been made — a real precondition on expected repo state.
+  next_step_template: wraps each tool/command result as
+    "OBSERVATION: {{observation}}" for the next turn.
+
+TOOLS CONFIG (tools field)
+  env_variables: environment variables set for the shell session
+    (e.g. disabling pagers so output doesn't hang waiting for input)
+  bundles: ordered list of tool-bundle paths to load, e.g.
+    tools/registry, tools/edit_anthropic, tools/review_on_submit_m
+  registry_variables: bundle-specific config, e.g. USE_FILEMAP: true,
+    and SUBMIT_REVIEW_MESSAGES — a template shown to the agent at submit
+    time instructing it to: rerun the reproduction script, delete the
+    reproduction script, revert any test-file edits via
+    `git checkout -- <path>`, then resubmit. This is a concrete,
+    code-enforced postcondition workflow on tout, not just a suggestion.
+  enable_bash_tool: true
+  parse_function.type: "function_calling"
+
+HISTORY PROCESSORS
+  cache_control processor with last_n_messages controls how much prior
+  conversation is retained/cached per turn (example config uses 2).

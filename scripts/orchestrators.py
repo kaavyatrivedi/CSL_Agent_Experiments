@@ -94,8 +94,8 @@ def check_pre_compatibility(subtask_desc, contract):
             'mockup', 'looks like'],                                         # A18
 
         '@input_is_feature_description': 
-            ['spec', 'requirements', 'shall', 'system', 'feature',
-            'kiro', 'specification'],                                        # A19
+            ['spec', 'requirements', 'shall', 'feature', 'kiro', 
+            'specification', 'user story', 'new capability'],                # A19
 
         '@input_is_terminal_task': 
             ['terminal', 'bash', 'shell', 'script', 'command',
@@ -111,10 +111,12 @@ def check_pre_compatibility(subtask_desc, contract):
 
         '@output_is_localisation_result':   [],   # A01
         '@output_is_valid_patch':           [],   # A02, A10, A11
+        '@output_preserves_test_files':     [],   # A02
         '@output_is_verification_result':   [],   # A03
         '@output_is_code_file':             [],   # A04, A06
         '@output_is_file_list':             [],   # A05
         '@output_is_search_replace_block':  [],   # A07, A08
+        '@output_has_filepath_before_block':[],   # A07, A08
         '@output_is_root_cause_analysis':   [],   # A09
         '@output_is_merged_patch':          [],   # A11
         '@output_is_test_run_report':       [],   # A12

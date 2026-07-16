@@ -15,6 +15,7 @@ pre:                          # When is it SAFE to call this agent?
   structural: 'description != null and len(description) > 0'
   semantic:
     - '@input_is_feature_description'
+    - '@input_is_feature_not_bugfix'
  
 post:  # What must be TRUE about the output?
   structural: "'THE SYSTEM SHALL' in output or ('requirements' in output and '##' in output)"

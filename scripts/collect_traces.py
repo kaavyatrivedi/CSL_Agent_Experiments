@@ -79,7 +79,7 @@ for task in tasks[:30]:   # start with 30
     # is_valid_output = '```' in output and ('import ' in output or 'require(' in output) #A17
     # is_valid_output = '```' in output and ('className' in output or 'import ' in output) #A18
     # is_valid_output = 'THE SYSTEM SHALL' in output or ('requirements' in output.lower() and '##' in output) #A19
-    is_valid_output = '```' in output and ('bash' in output or '```sh' in output or '$' in output) #A20
+    # is_valid_output = '```' in output and ('bash' in output or '```sh' in output or '$' in output) #A20
 
 
 

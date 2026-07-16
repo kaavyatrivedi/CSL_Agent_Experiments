@@ -1,0 +1,42 @@
+Aider — Edit Formats & Scripting
+
+OUTPUT FORMAT (tout)
+Not fixed — determined by a runtime config parameter, --edit-format.
+Five possible formats:
+  whole         full file contents returned, prefixed with the file path
+  diff          search/replace blocks in git-merge-conflict-style syntax;
+                file path appears directly above the fenced block
+  diff-fenced   same as diff, but file path moves inside the fence
+                (used specifically for Gemini models)
+  udiff         modified unified-diff format (---/+++/@@ style); used
+                historically for GPT-4 Turbo to prevent eliding code
+                with placeholder comments
+  editor-diff / editor-whole   same underlying formats, used only in
+                architect mode (see below), with a narrower prompt
+
+STRUCTURAL CONSTRAINT ON OUTPUT
+Regardless of which format is active, the model must emit the target
+file path immediately before the fenced edit block. This ordering is
+required, not optional formatting.
+
+TWO-STAGE COMPOSITION (architect mode)
+In architect mode, Aider splits into two roles: an architect model that
+reasons about the fix in plain text, and a separate editor model that
+converts those instructions into a syntactically valid diff or whole
+edit. This is a two-stage pipeline, not a single atomic call.
+
+INPUT (tin) VIA SCRIPTING API
+  fnames: list of files to add to context
+  model: model name
+  instruction: free-text passed to coder.run(instruction); each call
+    executes one instruction and returns
+
+CONFIG FLAGS RELEVANT TO BEHAVIOR
+  --yes                 skip confirmation prompts
+  --dry-run             no actual file writes (simulate only)
+  --auto-commits        commit changes to git automatically
+  --dirty-commits        proceed even with an uncommitted/dirty working tree
+
+CAVEAT
+The Python scripting API is not officially supported or documented, and
+may change in future releases without backwards compatibility.

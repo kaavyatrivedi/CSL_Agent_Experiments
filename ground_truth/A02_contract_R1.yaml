@@ -22,6 +22,7 @@ post:  # What must be TRUE about the output?
   structural: "output.startswith('---') or '@@' in output"
   semantic:
     - '@output_is_valid_patch' 
+    - '@output_preserves_test_files'
  
 tout:                         # What the agent PRODUCES as output
   type: string    # Output: raw text diff

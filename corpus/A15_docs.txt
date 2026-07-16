@@ -1,0 +1,48 @@
+v0 Platform API — Reference
+
+AUTHENTICATION
+All requests require an API key, sent as: Authorization: Bearer <V0_API_KEY>
+Requests without a valid key fail with HTTP 403.
+
+CREATE CHAT (generate from a prompt)
+Function: v0.chats.create(params)
+Input fields:
+  - message (string, required): natural language instruction describing what to build
+  - system (string, optional): background context, e.g. framework or tooling constraints
+  - modelId (string, optional): one of "v0-mini" | "v0-pro" | "v0-max"
+  - chatPrivacy (string, optional): one of "public" | "private" | "team-edit" | "team" | "unlisted"
+  - projectId (string, optional): associates the chat with an existing project
+
+INITIALIZE CHAT (start from existing content instead of generating from scratch)
+Function: v0.chats.init(params)
+Input fields:
+  - type (string, required): one of "files" | "repo" | "registry" | "zip"
+  - files (array, required if type="files"): list of {name, content} objects
+  - repo (object, required if type="repo"): {url} — public or connected private GitHub repo
+  - lockFiles (boolean, optional): if true, prevents the model from overwriting the
+    supplied files during generation
+
+SEND MESSAGE (follow-up turn on an existing chat)
+Function: v0.chats.sendMessage({chatId, message})
+Input fields:
+  - chatId (string, required)
+  - message (string, required)
+Note: this mutates the existing chat rather than creating a new one.
+
+OUTPUT — Chat object
+  - id (string)
+  - webUrl (string): canonical URL to view the chat
+  - latestVersion (object):
+      - id (string)
+      - status (string): generation status of this version
+      - demoUrl (string, optional): live preview URL
+      - files (array): list of {name, content} — the generated code
+  - messages (array): full message history, each with:
+      - role (string): "user" | "assistant"
+      - content (string)
+      - finishReason (string, optional): one of "stop" | "length" |
+        "content-filter" | "tool-calls" | "error" | "other" | "unknown"
+
+ERRORS
+  - 403: authentication failed (missing/invalid API key)
+  - 429: rate limit exceeded

@@ -1,0 +1,43 @@
+Replit Agent — Overview
+
+INTERACTION MODEL
+Chat-based, interactive. No documented external request/response API.
+User describes an app/task in natural language inside the Project Editor;
+Agent plans, writes code, sets up infrastructure, and iterates via
+follow-up chat messages. No formal input/output schema is published.
+
+INPUT ("tin", informal)
+  - message (string): natural language description of the desired app/task
+  - project_type (optional, one of): Web | Mobile | Slides | Animation |
+    Design | Data Visualization | Automation | 3D Game | Document |
+    Spreadsheet — if omitted, Agent infers it from the message
+  - agent_mode (one of): Lite | Economy | Power
+      Lite: fastest, lowest-cost, for small/scoped changes (10-60 sec)
+      Economy: balanced cost/quality, default for most builds
+      Power: most capable models, for complex/large changes
+  - turbo (boolean, only valid when agent_mode=Power): faster builds at
+    higher cost; requires Pro or Enterprise plan
+  - high_effort (boolean, valid in Economy or Power): applies the most
+    capable frontier model to complex sub-tasks
+  - plan_mode (boolean): if true, Agent produces an ordered task list for
+    review/approval before making any code or data changes, rather than
+    building immediately
+
+STRUCTURAL PRECONDITION
+  Turbo requires agent_mode == "Power" AND plan tier in {Pro, Enterprise}.
+  On Core plan or non-Power modes, Turbo is unavailable regardless of the
+  toggle state.
+
+BEHAVIOR / PROCESS (relevant to post/pre semantics)
+  - Agent tests its own output periodically during the build and creates
+    checkpoints, allowing rollback to any prior state.
+  - Plan mode is a distinct two-phase flow: (1) produce a task list,
+    (2) build only after the task list is accepted — treat as sequential
+    composition, not a single atomic call, if modeling Plan mode agents.
+  - Agent can pull data from connected services (BigQuery, Linear, Slack,
+    Notion) directly within a chat turn.
+
+OUTPUT ("tout", informal)
+  No structured API response. Output is an interactive project
+  (web app / mobile app / slides / etc.) within the Replit environment,
+  optionally multiple artifact types sharing one backend within a project.

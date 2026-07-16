@@ -1,0 +1,49 @@
+Same.new — Prompting & Version Control
+
+INTERACTION MODEL
+Chat-based, interactive, no documented external request/response API.
+Each user message ("prompt") is one turn; Same responds with code edits
+(shown as diffs) and updates a live preview. No formal input/output
+schema is published.
+
+INPUT ("tin", informal) — prompting guidance
+  - message (string): should relate to a single task/change, not multiple
+    bundled requests. Effectiveness depends on specificity: naming the
+    exact UI element/file and the exact symptom, not vague descriptions.
+  - context (optional): supplied via "@ Add context" — specific files,
+    summaries of prior chats, or external URLs (e.g. a reference
+    component's docs). Preferred over asking Same to search on its own.
+  - guidance mode (optional, triggered by phrasing): asking for a "plan,"
+    a "report," or a set of options (e.g. "three ways to improve X")
+    causes Same to reason/investigate before taking action, rather than
+    executing immediately.
+
+THINGS THE SYSTEM EXPLICITLY REJECTS (real, checkable precondition/error
+behavior — not just style advice)
+  - Token-count estimate requests: not supported, no internal token
+    count is exposed to the model.
+  - Downloadable ZIP requests: packaging/serving a ZIP is outside
+    Same's capabilities; a separate download button in the project UI
+    handles this instead.
+  - Revert/undo requests via chat: not handled through prompting at all;
+    must go through the separate version-control UI (see below).
+
+STATE MODEL / VERSIONING (relevant to post and comp)
+  - Checkpoints are created automatically after every agent file edit
+    (create/modify/delete) and before every processed user message.
+  - "Major versions" are a separate, coarser layer, shown in a Version
+    History panel.
+  - Reverting is two-stage: a non-destructive "preview" of an older
+    checkpoint/version, then an explicit, permanent "rollback" or
+    "revert" action. Reverting deletes all later messages and changes —
+    this is a destructive, one-way postcondition on project state, not
+    reversible after confirmation.
+  - Reverting a user-message checkpoint restores state to immediately
+    BEFORE that message was processed (not after).
+  - A "Remix" can be created to preserve history prior to a destructive
+    revert.
+
+OUTPUT ("tout", informal)
+  No structured API response. Output is a live-updated project (code +
+  preview) shown in the workbench; changes are surfaced to the user as
+  diffs for review before/after each turn.

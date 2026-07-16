@@ -12,7 +12,7 @@ tin:                          # What the agent ACCEPTS as input
   required: [description]    
  
 pre:                          # When is it SAFE to call this agent?
-  structural: 'description != null and len(description) > 0'
+  structural: 'description != null and len(description) > 0 and len(description) <= 50000'
   semantic:
     - '@input_is_ui_description'
  

@@ -1,0 +1,37 @@
+Lovable API — Build with URL (open Beta)
+
+TRIGGER MECHANISM
+Not a request/response API. A constructed URL opens the Lovable web app
+and begins app generation interactively in the browser. No programmatic
+response object is returned to the caller.
+
+BASE URL
+https://lovable.dev/?autosubmit=true#
+
+  autosubmit (boolean, required): must be "true" to auto-process the request
+
+INPUT PARAMETERS (appended after the base URL fragment)
+  prompt (string, required): natural language description of the app to build.
+    Max 50,000 characters. Must be URL-encoded.
+  images (string, optional, repeatable up to 10): publicly accessible image
+    URLs used as visual references. Supported formats: JPEG, PNG, WebP.
+    Must be URL-encoded.
+
+EXAMPLE
+  https://lovable.dev/?autosubmit=true#prompt=Create%20a%20todo%20app
+
+AUTHENTICATION / SESSION FLOW
+  - Logged-in user: selects a workspace, generation starts automatically.
+  - Not logged-in: redirected to signup/login; after auth, selects a
+    workspace, and generation starts automatically with the original
+    prompt and images preserved.
+
+OUTPUT
+  No structured output is returned via the API itself. The result is an
+  interactive Lovable project session in the browser (editable app,
+  optionally syncable to a connected GitHub repo).
+
+ERROR CONDITIONS
+  - URL exceeds browser length limits ("URL too long")
+  - Malformed parameters cause incomplete parsing
+  - Failed autosubmission if the URL is malformed
