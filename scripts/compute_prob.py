@@ -30,5 +30,3 @@ for i in range(1, 21):
         result = compute_prob_field(aid)
     except FileNotFoundError:
         print(f'{aid}: traces not found yet')
- 
-python scripts/compute_prob.py
