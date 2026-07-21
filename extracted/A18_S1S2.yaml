@@ -1,0 +1,29 @@
+contract_id: gpt-4.1
+tin:
+  type: object
+  properties:
+    message: string
+    context: string
+    guidance_mode: string
+  required:
+    - message
+pre:
+  structural: message != ""
+  semantic: 
+    - @valid_input_message
+post:
+  structural: true
+  semantic:
+    - @successful_execution
+tout:
+  type: object
+  properties:
+    result: string
+    updated_project: boolean
+prob:
+  satisfaction_rate: 0.6
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: ASSIST

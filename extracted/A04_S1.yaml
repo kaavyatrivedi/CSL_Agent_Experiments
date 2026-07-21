@@ -1,0 +1,24 @@
+contract_id: OpenHands CodeWriter v1
+tin:
+  type: object
+  properties:
+    spec: string
+  required:
+    - spec
+pre:
+  structural: spec != ""
+  semantic: []
+post:
+  structural: output != ""
+  semantic: [@code_matches_spec, @follows_code_quality_guidelines, @new_code_only]
+tout:
+  type: object
+  properties:
+    output: string
+prob:
+  satisfaction_rate: 0.67
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCEPTUAL_TRANSLATION

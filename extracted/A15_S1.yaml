@@ -1,0 +1,34 @@
+contract_id: v0_v0
+tin:
+  type: object
+  properties:
+    issue_description:
+      type: string
+    file_access: 
+      type: boolean
+  required:
+    - issue_description
+pre:
+  structural: "issue_description != '' and file_access == true"
+  semantic:
+    - @valid_issue_description
+    - @has_file_access
+post:
+  structural: true
+  semantic:
+    - @identify_bug
+    - @provide_solution
+tout:
+  type: object
+  properties:
+    reproduction_script:
+      type: string
+    code_patch:
+      type: string
+prob:
+  satisfaction_rate: 0.83
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

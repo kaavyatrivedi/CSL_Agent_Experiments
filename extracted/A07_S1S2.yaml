@@ -1,0 +1,30 @@
+contract_id: SoftwareRefactoringExpertV1
+tin:
+  type: object
+  properties: 
+    fnames: array
+    model: string
+    instruction: string
+  required: [fnames, model, instruction]
+pre:
+  structural: true
+  semantic: 
+    - @understand_refactor_instructions
+    - @ensure_filenames_exist
+post:
+  structural: true
+  semantic: 
+    - @implement_refactor_changes
+    - @output_in_search_replace_blocks
+tout:
+  type: object
+  properties: 
+    output_format: string
+    structural_constraints: boolean
+prob:
+  satisfaction_rate: 0.53
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

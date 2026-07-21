@@ -1,0 +1,35 @@
+contract_id: StackTraceAnalyzer-v1
+tin:
+  type: object
+  properties:
+    stack_trace:
+      type: string
+    repo:
+      type: string
+  required:
+    - stack_trace
+    - repo
+pre:
+  structural: stack_trace != "" and repo != ""
+  semantic: []
+post:
+  structural: '"Error type" in output and "Root cause location" in output and "Explanation" in output'
+  semantic: [@identifies_root_cause_accurately]
+tout:
+  type: object
+  properties:
+    Error type:
+      type: string
+    Root cause location:
+      type: string
+    Explanation:
+      type: string
+    Alternatives:
+      type: string
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

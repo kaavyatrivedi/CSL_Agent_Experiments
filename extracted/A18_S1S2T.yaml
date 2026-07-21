@@ -1,0 +1,35 @@
+contract_id: "AI coding assistant gpt-4.1"
+tin:
+  type: object
+  properties:
+    message:
+      type: string
+    context:
+      type: string
+    guidance_mode:
+      type: boolean
+  required: 
+    - message
+pre:
+  structural: "true"
+  semantic:
+    - "@single_task_decision"
+    - "@sufficient_context"
+post:
+  structural: "true"
+  semantic:
+    - "@query_resolved"
+tout:
+  type: object
+  properties:
+    live_preview:
+      type: boolean
+    diffs:
+      type: string
+prob:
+  satisfaction_rate: 0.6
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

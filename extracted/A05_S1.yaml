@@ -1,0 +1,36 @@
+contract_id: OpenHandsFileFinder_v1
+tin:
+  type: object
+  properties:
+    problem_statement:
+      type: string
+  required:
+    - problem_statement
+pre:
+  structural: "problem_statement != ''"
+  semantic: 
+    - @is_valid_issue_description
+post:
+  structural: "len(output_relevant_files) <= 5"
+  semantic: 
+    - @files_ranked_by_relevance
+    - @includes_file_path_and_relevance
+tout:
+  type: object
+  properties:
+    output_relevant_files:
+      type: array
+      items:
+        type: object
+        properties:
+          file_path:
+            type: string
+          relevance_explanation:
+            type: string
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

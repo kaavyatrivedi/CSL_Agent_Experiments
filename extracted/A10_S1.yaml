@@ -1,0 +1,26 @@
+contract_id: PatchMergeAgent_v1
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+    patch_a: string
+    patch_b: string
+  required: [repo, patch_a, patch_b]
+pre:
+  structural: "repo is not None and patch_a is not None and patch_b is not None"
+  semantic: [@valid_patch_format, @non_empty_patches]
+post:
+  structural: "output is string"
+  semantic: [@no_unresolved_merge_conflicts, @preserves_intent_of_all_patches]
+tout:
+  type: object
+  properties:
+    output: string
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: MERGE

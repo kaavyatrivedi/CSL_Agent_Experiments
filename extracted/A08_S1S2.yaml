@@ -1,0 +1,25 @@
+contract_id: Aider-Edit_v1
+tin:
+  type: object
+  properties:
+    fnames: array
+    model: string
+    instruction: string
+  required: [fnames, model, instruction]
+pre:
+  structural: fnames != null and model != null and instruction != null
+  semantic: [@valid_file_paths, @recognized_model, @valid_instruction_format]
+post:
+  structural: tout.properties contains edit blocks
+  semantic: [@correct_change_format, @syntax_validity, @context_preserved]
+tout:
+  type: object
+  properties:
+    output: string
+prob:
+  satisfaction_rate: 0.63
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

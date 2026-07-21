@@ -1,0 +1,28 @@
+contract_id: VerificationAgent_v1
+tin:
+  type: object
+  properties:
+    issue: string
+    patch: string
+    tests: array
+  required: [issue, patch]
+pre:
+  structural: issue != "" && patch != ""
+  semantic: [@issue_parsed_correctly, @patch_applied_correctly]
+post:
+  structural: verdict in ["PASS", "FAIL"] && isinstance(tests_evaluated, list)
+  semantic: [@correctness_verified, @comprehensive_test_evaluation]
+tout:
+  type: object
+  properties:
+    verdict: string
+    tests_evaluated: array
+    edge_cases_missed: array
+    overall_reasoning: string
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

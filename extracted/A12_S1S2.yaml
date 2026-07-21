@@ -1,0 +1,53 @@
+contract_id: "LLM-Test-Sim-1.0"
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+    test_suite: string
+    patch: string
+  required: 
+    - repo
+    - test_suite
+pre:
+  structural: "repo != '' and test_suite != ''"
+  semantic:
+    - "@test_suite_contains_valid_tests"
+post:
+  structural: "output_exists"
+  semantic: 
+    - "@faithful_report_of_tests"
+    - "@correct_test_status_assignment"
+tout:
+  type: object
+  properties:
+    overall_verdict: string
+    tests_passed: integer
+    tests_failed: integer
+    tests_skipped: integer
+    tests_unknown: integer
+    results: 
+      type: array
+      items:
+        type: object
+        properties:
+          test_file: string
+          test_function: string
+          status: string
+          reason: string
+    failure_details: 
+      type: array
+      items:
+        type: object
+        properties:
+          test_file: string
+          test_function: string
+          details: string
+    summary: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

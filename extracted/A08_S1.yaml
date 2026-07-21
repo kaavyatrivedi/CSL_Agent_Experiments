@@ -1,0 +1,29 @@
+contract_id: DocumentationExpertAgent-v1
+tin:
+  type: object
+  properties:
+    documentation_instructions: string
+  required:
+    - documentation_instructions
+pre:
+  structural: documentation_instructions != null
+  semantic: 
+    - @valid_instruction_format
+post:
+  structural: true
+  semantic: 
+    - @generate_documentation
+    - @no_code_modification
+tout:
+  type: object
+  properties:
+    search_replace_blocks: 
+      type: array
+      items: string
+prob:
+  satisfaction_rate: 0.63
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

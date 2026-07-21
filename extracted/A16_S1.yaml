@@ -1,0 +1,31 @@
+contract_id: Lovable_v1
+tin:
+  type: object
+  properties:
+    user_message: string
+    context_files: array
+    user_preference: string
+  required:
+    - user_message
+pre:
+  structural: user_message != ""
+  semantic:
+    - @is_valid_message_format
+post:
+  structural: updated_code != "" && updated_code_follows_best_practices == true
+  semantic:
+    - @implements_requested_feature
+    - @follows_design_guidelines
+tout:
+  type: object
+  properties:
+    updated_code: string
+    explanation: string
+    code_preview: string
+  prob:
+    satisfaction_rate: 0.4
+    confidence_delta: 0.05
+    min_sample_k: 30
+    latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

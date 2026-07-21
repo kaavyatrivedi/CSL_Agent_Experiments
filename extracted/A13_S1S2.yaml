@@ -1,0 +1,45 @@
+contract_id: GitHubIssueParserAgent_v1
+tin:
+  type: object
+  properties:
+    repo:
+      type: string
+    problem_statement:
+      type: string
+  required:
+    - repo
+    - problem_statement
+pre:
+  structural: "repo != '' and problem_statement != ''"
+  semantic: ["@input_nonempty"]
+post:
+  structural: "Title != '' and Error_type != '' and Affected_components != '' and Expected_behaviour != '' and Actual_behaviour != '' and Reproduction_steps != '' and Environment != '' and Additional_context != ''"
+  semantic: ["@output_valid_format"]
+tout:
+  type: object
+  properties:
+    Title:
+      type: string
+    Error_type:
+      type: string
+    Affected_components:
+      type: string
+    Expected_behaviour:
+      type: string
+    Actual_behaviour:
+      type: string
+    Reproduction_steps:
+      type: string
+    Environment:
+      type: string
+    Additional_context:
+      type: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:
+    mu: 0.0
+    sigma: 0.0
+comp:
+  type: PARSE

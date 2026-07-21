@@ -1,0 +1,44 @@
+contract_id: "CodeSummarisationAgent-v1"
+tin:
+  type: object
+  properties:
+    repo:
+      type: string
+    problem_statement:
+      type: string
+    function_code:
+      type: string
+  required:
+    - function_code
+pre:
+  structural: "function_code in tin"
+  semantic: ["@repository_exists", "@context_conveyed_in_problem_statement"]
+post:
+  structural: "outputs_present and output_format_valid"
+  semantic: ["@accurate_purpose_identified", "@inputs_mapped_correctly", "@outputs_described_correctly"]
+tout:
+  type: object
+  properties:
+    purpose:
+      type: string
+    inputs:
+      type: array
+      items:
+        type: string
+    outputs:
+      type: string
+    edge_cases_handled:
+      type: string
+    calls:
+      type: string
+    notes:
+      type: string
+prob:
+  satisfaction_rate: 0.87
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:
+    mu: 0.0
+    sigma: 0.0
+comp:
+  type: SELECT

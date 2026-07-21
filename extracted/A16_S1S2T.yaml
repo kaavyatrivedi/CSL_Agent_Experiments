@@ -1,0 +1,34 @@
+contract_id: Lovable1.0
+tin:
+  type: object
+  properties:
+    prompt:
+      type: string
+    images:
+      type: string
+required:
+  - prompt
+pre:
+  structural: "prompt != null && prompt.length <= 50000 && autosubmit == true"
+  semantic: []
+post:
+  structural: "output format adheres to Lovable web app standards"
+  semantic:
+    - @interactive_session_created
+    - @error_handling_mechanisms_engaged
+tout:
+  type: object
+  properties:
+    session_status:
+      type: string
+    error_conditions:
+      type: string
+prob:
+  satisfaction_rate: 0.4
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal:
+    mu: 0.0
+    sigma: 0.0
+comp:
+  type: RESOLVE

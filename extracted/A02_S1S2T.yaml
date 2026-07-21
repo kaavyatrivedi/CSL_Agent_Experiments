@@ -1,0 +1,25 @@
+contract_id: "unified-diff-patch-generator-v1"
+tin:
+  type: object
+  properties:
+    working_dir: string
+    problem_statement: string
+    localised_file: string
+  required: [working_dir, problem_statement, localised_file]
+pre:
+  structural: "working_dir && problem_statement && localised_file"
+  semantic: [@specify_bug_fix_only, @minimal_patch_generation, @exclude_test_file_modifications]
+post:
+  structural: "diff_patch"
+  semantic: [@valid_unified_diff_format, @patch_only_localised_file, @include_context]
+tout:
+  type: object
+  properties:
+    diff_patch: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

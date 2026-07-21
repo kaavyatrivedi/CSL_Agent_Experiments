@@ -1,0 +1,68 @@
+contract_id: "TestSuiteExecutionAgent_v1"
+tin:
+  type: object
+  properties:
+    repo:
+      type: string
+    problem_statement:
+      type: string
+    test_suite:
+      type: string
+    patch:
+      type: string
+  required:
+    - repo
+    - test_suite
+pre:
+  structural: "repo != null and test_suite != null"
+  semantic: 
+    - "@input_repository_is_accessible"
+    - "@test_suite_is_not_empty"
+post:
+  structural: "overall_verdict in ['PASS', 'FAIL', 'PARTIAL']"
+  semantic: 
+    - "@all_tests_evaluated"
+    - "@report_contains_summary"
+    - "@failure_details_if_any"
+tout:
+  type: object
+  properties:
+    overall_verdict:
+      type: string
+    tests_passed:
+      type: integer
+    tests_failed:
+      type: integer
+    tests_skipped:
+      type: integer
+    tests_unknown:
+      type: integer
+    results:
+      type: array
+      items:
+        type: object
+        properties:
+          test_location:
+            type: string
+          result:
+            type: string
+          reason:
+            type: string
+    failure_details:
+      type: array
+      items:
+        type: object
+        properties:
+          test_location:
+            type: string
+          details:
+            type: string
+    summary:
+      type: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

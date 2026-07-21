@@ -1,0 +1,25 @@
+contract_id: PatchAgent-1.0
+tin:
+  type: object
+  properties:
+    working_dir: string
+    problem_statement: string
+    localised_file: string
+  required: [working_dir, problem_statement, localised_file]
+pre:
+  structural: "{{working_dir}} != '' and {{problem_statement}} != '' and {{localised_file}} != ''"
+  semantic: ["@test_files_already_modified"]
+post:
+  structural: "{{diff}} != ''"
+  semantic: ["@minimal_patch_correctness", "@surrounding_logic_integrity"]
+tout:
+  type: object
+  properties:
+    diff: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

@@ -1,0 +1,31 @@
+contract_id: Kiro_v1
+tin:
+  type: object
+  properties:
+    feature: string
+    bug: string
+    repo: string
+  required:
+    - feature
+    - bug
+pre:
+  structural: feature != null || bug != null
+  semantic:
+    - @identify_structure_type_valid
+post:
+  structural: output != null
+  semantic:
+    - @correct_output_format
+tout:
+  type: object
+  properties:
+    requirements: string
+    design: string
+    tasks: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

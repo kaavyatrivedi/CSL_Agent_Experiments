@@ -1,0 +1,30 @@
+contract_id: "BugLocalisationAgent_v1"
+tin:
+  type: object
+  properties:
+    working_dir: string
+    problem_statement: string
+  required: ["working_dir", "problem_statement"]
+pre:
+  structural: "working_dir != '' && problem_statement != ''"
+  semantic: ["@working_directory_accessible", "@problem_statement_understood"]
+post:
+  structural: "len(output_files) > 0 && all('Reason' in f for f in output_files)"
+  semantic: ["@correct_file_identification"]
+tout:
+  type: object
+  properties:
+    output_files:
+      type: array
+      items:
+        type: object
+        properties:
+          relative_path: string
+          reason: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: "SELECT"

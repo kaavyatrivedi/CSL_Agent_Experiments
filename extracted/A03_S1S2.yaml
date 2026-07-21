@@ -1,0 +1,38 @@
+contract_id: VerifierAgent_v1
+tin:
+  type: object
+  properties:
+    working_dir: string
+    problem_statement: string
+    patch: string
+  required: [working_dir, problem_statement, patch]
+pre:
+  structural: "working_dir != '' and problem_statement != '' and patch != ''"
+  semantic: ["@repoStateUnmodified", "@validPatchFormat"]
+post:
+  structural: "Verdict in ['PASS', 'FAIL']"
+  semantic: ["@testsEvaluatedCorrectly", "@edgeCasesReported"]
+tout:
+  type: object
+  properties:
+    Verdict: string
+    Tests_evaluated: 
+      type: array
+      items:
+        type: object
+        properties:
+          test: string
+          result: string
+        required: [test, result]
+    Edge_cases_missed: 
+      type: array
+      items:
+        type: string
+    Overall_reasoning: string
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

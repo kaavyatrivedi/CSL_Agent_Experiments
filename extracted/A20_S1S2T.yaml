@@ -1,0 +1,36 @@
+contract_id: AgentMode_v1
+tin:
+  type: object
+  properties:
+    - natural_language_request: string
+    - shell_command: string
+    - conversation_context: object
+    - warp_drive_objects: object
+  required:
+    - natural_language_request
+    - conversation_context
+pre:
+  structural: (natural_language_request != NULL) || (shell_command != NULL)
+  semantic: 
+    - @non_malicious_intent
+    - @valid_permission_settings
+post:
+  structural: (block != NULL) && (block.exit_code != NULL)
+  semantic: 
+    - @diagnose_and_correct_errors
+    - @stable_output_id
+tout:
+  type: object
+  properties:
+    - block: object
+    - exit_code: integer
+    - command_text: string
+    - duration: number
+    - stable_id: string
+prob:
+  satisfaction_rate: 0.73
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

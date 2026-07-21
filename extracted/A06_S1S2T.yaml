@@ -1,0 +1,38 @@
+contract_id: OpenHands TestGen v1
+tin:
+  type: object
+  properties:
+    function_or_spec:
+      type: string
+  required: 
+    - function_or_spec
+pre:
+  structural: 'True'
+  semantic: 
+    - "@inputs_ordered_correctly"
+post:
+  structural: 'True'
+  semantic:
+    - "@file_creation_in_correct_directory"
+    - "@tests_cover_all_cases"
+tout:
+  type: object
+  properties:
+    test_file_path:
+      type: string
+    test_cases:
+      type: array
+      items:
+        type: object
+        properties:
+          case_type: 
+            type: string
+          test_content:
+            type: string
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

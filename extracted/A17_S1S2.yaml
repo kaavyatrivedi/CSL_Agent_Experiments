@@ -1,0 +1,39 @@
+contract_id: Replit Assistant v1.0
+tin:
+  type: object
+  properties:
+    message:
+      type: string
+    project_type:
+      type: string
+      enum: [Web, Mobile, Slides, Animation, Design, Data Visualization, Automation, 3D Game, Document, Spreadsheet]
+    agent_mode:
+      type: string
+      enum: [Lite, Economy, Power]
+    turbo:
+      type: boolean
+    high_effort:
+      type: boolean
+    plan_mode:
+      type: boolean
+  required: [message, agent_mode]
+pre:
+  structural: "(tin.agent_mode == 'Power' AND tin.turbo == true) => (plan_tier in {'Pro', 'Enterprise'})"
+  semantic: [@checkPlanCompatibility]
+post:
+  structural: true
+  semantic: [@executePlan, @buildArtifacts, @enableInteractivity]
+tout:
+  type: object
+  properties:
+    artifacts:
+      type: array
+      items:
+        type: string
+prob:
+  satisfaction_rate: 0.5
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

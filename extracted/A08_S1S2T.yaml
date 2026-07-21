@@ -1,0 +1,38 @@
+contract_id: aider_0.1
+tin:
+  type: object
+  properties:
+    fnames:
+      type: array
+      items:
+        type: string
+    model:
+      type: string
+    instruction:
+      type: string
+  required:
+    - fnames
+    - model
+    - instruction
+pre:
+  structural: "fnames is not empty and model is not null and instruction is not null"
+  semantic:
+    - @documentation_required_fields
+post:
+  structural: "model_output conforms to the specified edit formats"
+  semantic:
+    - @correct_documentation_applied
+tout:
+  type: object
+  properties:
+    edit_blocks:
+      type: array
+      items:
+        type: string
+prob:
+  satisfaction_rate: 0.63
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONSENSUS

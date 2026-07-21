@@ -1,0 +1,28 @@
+contract_id: OpenHands CodeWriter v1
+tin:
+  type: object
+  properties:
+    spec: string
+  required:
+    - spec
+pre:
+  structural: spec != ""
+  semantic: 
+    - @spec_analysis_correct
+    - @spec_translatable_to_code
+post:
+  structural: output file includes the implementation as specified
+  semantic:
+    - @implementation_correct_as_per_spec
+    - @follows_code_quality_guidelines
+tout:
+  type: object
+  properties:
+    output_file: string
+prob:
+  satisfaction_rate: 0.67
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: MERGE

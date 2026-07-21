@@ -1,0 +1,30 @@
+contract_id: gpt-4.1
+tin:
+  type: object
+  properties:
+    user_state_info: string
+    session_edit_history: string
+    linter_errors: string
+  required: []
+pre:
+  structural: true
+  semantic:
+    - @auto_resolve_user_query
+    - @decide_relevant_context
+post:
+  structural: true
+  semantic:
+    - @provide_solution
+    - @ensure_query_resolution
+tout:
+  type: object
+  properties:
+    resolved_query: boolean
+    user_feedback: string
+prob:
+  satisfaction_rate: 0.6
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

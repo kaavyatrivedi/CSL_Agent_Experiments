@@ -1,0 +1,40 @@
+contract_id: RootCauseAnalysisAgent1.0
+tin:
+  type: object
+  properties:
+    stack_trace:
+      type: string
+    repo:
+      type: string
+  required:
+    - stack_trace
+    - repo
+pre:
+  structural: stack_trace is not None and repo is not None
+  semantic:
+    - @valid_stack_trace_format
+    - @repository_accessible
+post:
+  structural: "'Error type' in output and 'Root cause location' in output and 'Explanation' in output"
+  semantic:
+    - @accurate_root_cause_identification
+    - @precise_error_explanation
+    - @alternatives_identification
+tout:
+  type: object
+  properties:
+    Error type:
+      type: string
+    Root cause location:
+      type: string
+    Explanation:
+      type: string
+    Alternatives:
+      type: string
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

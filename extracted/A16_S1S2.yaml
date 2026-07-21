@@ -1,0 +1,28 @@
+contract_id: Lovable-v2025
+tin:
+  type: object
+  properties:
+    prompt: string
+    images:
+      type: array
+      items:
+        type: string
+  required: [prompt]
+pre:
+  structural: prompt != null
+  semantic: [@input_prompt_description_valid]
+post:
+  structural: prompt != null
+  semantic: [@interactive_session_generated]
+tout:
+  type: object
+  properties:
+    session_id: string
+    project_url: string
+prob:
+  satisfaction_rate: 0.4
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

@@ -1,0 +1,34 @@
+contract_id: codebug_localiser_v1
+tin:
+  type: object
+  properties:
+    working_dir: 
+      type: string
+    problem_statement: 
+      type: string
+  required: [working_dir, problem_statement]
+pre:
+  structural: working_dir != "" and problem_statement != ""
+  semantic: [@valid_issue_description, @directory_accessible]
+post:
+  structural: true
+  semantic: [@identified_most_likely_buggy_files]
+tout:
+  type: object
+  properties:
+    LocalisationResult:
+      type: array
+      items:
+        type: object
+        properties:
+          File:
+            type: string
+          Reason:
+            type: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

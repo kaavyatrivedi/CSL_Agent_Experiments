@@ -1,0 +1,31 @@
+contract_id: Kiro1.0
+tin:
+  type: object
+  properties:
+    user_role: string
+    feature_request: string
+    system_context: string
+    coding_query: string
+  required:
+    - feature_request
+pre:
+  structural: feature_request != ""
+  semantic: []
+post:
+  structural: '"THE SYSTEM SHALL" in response or "## REQUIREMENTS" in response'
+  semantic: 
+    - @response_includes_requirements
+    - @response_follows_best_practices
+    - @no_sensitive_topics_mentioned
+tout:
+  type: object
+  properties:
+    response: string
+    code_snippets: array
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

@@ -1,0 +1,26 @@
+contract_id: ReplitAssistant_v1
+tin:
+  type: object
+  properties:
+    query: string
+    existing_files: array
+    is_nudge_required: boolean
+  required: [query]
+pre:
+  structural: existing_files is array
+  semantic: [@validate_query_format, @check_nudge_needed]
+post:
+  structural: changes_proposed is boolean
+  semantic: [@successful_file_edit, @accurate_shell_proposal]
+tout:
+  type: object
+  properties:
+    changes_proposed: boolean
+    proposed_nudges: array
+prob:
+  satisfaction_rate: 0.5
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

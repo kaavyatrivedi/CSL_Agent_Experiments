@@ -1,7 +1,7 @@
 import json, numpy as np
  
 def compute_prob_field(agent_id):
-    with open(f'corpus/{agent_id}_traces.json') as f:
+    with open(f'corpus/{agent_id}_traces.json', encoding='utf-8') as f:
         traces = json.load(f)
     
     # Satisfaction rate = fraction of traces where postcondition held
@@ -30,5 +30,4 @@ for i in range(1, 21):
         result = compute_prob_field(aid)
     except FileNotFoundError:
         print(f'{aid}: traces not found yet')
- 
-python scripts/compute_prob.py
+

@@ -1,0 +1,32 @@
+contract_id: "SoftwarePatchMerger-1.0"
+tin:
+  type: object
+  properties:
+    repo:
+      type: string
+    problem_statement:
+      type: string
+    patch_a:
+      type: string
+    patch_b:
+      type: string
+  required: ["repo", "patch_a", "patch_b"]
+pre:
+  structural: "patch_a != '' && patch_b != ''"
+  semantic: ["@check_non_empty_patches", "@check_repository_accessible"]
+post:
+  structural: "output != ''"
+  semantic: ["@check_merged_diff", "@flag_incompatible_conflicts"]
+tout:
+  type: object
+  properties:
+    merged_patch:
+      type: string
+  required: ["merged_patch"]
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: MERGE

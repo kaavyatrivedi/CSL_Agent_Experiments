@@ -1,0 +1,28 @@
+contract_id: ExpertCodeRefactor-1.0
+tin:
+  type: object
+  properties:
+    fnames: array
+    model: string
+    instruction: string
+  required:
+    - fnames
+    - model
+    - instruction
+pre:
+  structural: model != ''
+  semantic: [@valid_file_paths, @instruction_understandable]
+post:
+  structural: fnames.length > 0
+  semantic: [@appropriate_refactor, @uses_best_practices, @maintains_existing_conventions]
+tout:
+  type: object
+  properties:
+    edited_files: array
+prob:
+  satisfaction_rate: 0.53
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

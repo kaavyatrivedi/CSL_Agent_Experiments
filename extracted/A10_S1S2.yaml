@@ -1,0 +1,44 @@
+contract_id: "PatchMergeAgent-v1"
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+    patch_a: string
+    patch_b: string
+  required: 
+    - repo
+    - problem_statement
+    - patch_a
+    - patch_b
+pre:
+  structural: "true"
+  semantic: 
+    - "@identify_overlapping_regions"
+    - "@detect_conflicts"
+post:
+  structural: "true"
+  semantic: 
+    - "@generate_unified_diff"
+    - "@flag_unresolved_conflicts"
+tout:
+  type: object
+  properties:
+    unified_diff: string
+    conflicts: 
+      type: array
+      items: 
+        type: object
+        properties:
+          file_path: string
+          line_range: string
+          patch_a_description: string
+          patch_b_description: string
+          resolution_needed: string
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: MERGE

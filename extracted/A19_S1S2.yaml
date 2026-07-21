@@ -1,0 +1,26 @@
+contract_id: Kiro_v1
+tin:
+  type: object
+  properties: 
+    task_type: string
+  required: 
+    - task_type
+pre:
+  structural: "task_type == 'Feature' or task_type == 'Bug'"
+  semantic: 
+    - @ensure_appropriate_task_type
+post:
+  structural: "output.contains('THE SYSTEM SHALL') or output.contains('## REQUIREMENTS')"
+  semantic: 
+    - @output_includes_requirements
+tout:
+  type: object
+  properties: 
+    output: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONSENSUS

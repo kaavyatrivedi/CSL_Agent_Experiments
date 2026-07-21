@@ -1,0 +1,25 @@
+contract_id: OpenHands_TestGen_v1
+tin:
+  type: object
+  properties:
+    function_or_spec: string
+    file_path: string
+  required:
+    - function_or_spec
+pre:
+  structural: function_or_spec is not None
+  semantic: [@reviews_target]
+post:
+  structural: True
+  semantic: [@generates_unit_tests]
+tout:
+  type: object
+  properties:
+    test_file_content: string
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

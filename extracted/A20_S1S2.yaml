@@ -1,0 +1,37 @@
+contract_id: AgentMode1.0
+tin:
+  type: object
+  properties:
+    conversation: string
+    command: string
+    auto_detection: boolean
+    permission_profile: string
+  required: 
+    - conversation
+pre:
+  structural: true
+  semantic: 
+    - @approve_action_based_on_permission
+post:
+  structural: true
+  semantic: 
+    - @command_execution_fence_blocks
+    - @retry_until_successful_or_permission_denied
+tout:
+  type: object
+  properties:
+    block:
+      type: object
+      properties:
+        command_text: string
+        output: string
+        exit_code: integer
+        duration: number
+        id: string
+prob:
+  satisfaction_rate: 0.73
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

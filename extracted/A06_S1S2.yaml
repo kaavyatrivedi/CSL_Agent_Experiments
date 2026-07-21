@@ -1,0 +1,25 @@
+contract_id: OpenHands_TestGen_v1
+tin:
+  type: object
+  properties: 
+    function_or_spec: string
+    test_file_path: string
+  required:
+    - function_or_spec
+pre:
+  structural: function_or_spec != null and test_file_path != null
+  semantic: ["@verify_system_prompt_event_presence"]
+post:
+  structural: true
+  semantic: ["@generate_unit_tests_for_function", "@note_suspected_bug_in_comment"]
+tout:
+  type: object
+  properties: 
+    test_output: string
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

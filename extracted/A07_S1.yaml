@@ -1,0 +1,24 @@
+contract_id: RefactoringExpertAgent_v1
+tin:
+  type: object
+  properties:
+    refactor_instructions: string
+  required:
+    - refactor_instructions
+pre:
+  structural: refactor_instructions != ''
+  semantic: [@check_valid_instructions_format]
+post:
+  structural: output_contains_SEAERCH_REPLACE_blocks
+  semantic: [@refactor_according_to_instructions]
+tout:
+  type: object
+  properties:
+    SEARCH_REPLACE_blocks: string
+prob:
+  satisfaction_rate: 0.53
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONSENSUS

@@ -1,0 +1,36 @@
+contract_id: GitHubIssueParser-v1
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+  required:
+    - repo
+    - problem_statement
+pre:
+  structural: "repo is not null and problem_statement is not null"
+  semantic: 
+    - @read_and_analyze_issue
+post:
+  structural: "output contains Title, Error type, Affected components, Expected behaviour, Actual behaviour, Reproduction steps, Environment, Additional context"
+  semantic:
+    - @reproduce_structured_output
+    - @handle_unspecified_fields
+tout:
+  type: object
+  properties:
+    Title: string
+    Error_type: string
+    Affected_components: string
+    Expected_behaviour: string
+    Actual_behaviour: string
+    Reproduction_steps: string
+    Environment: string
+    Additional_context: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

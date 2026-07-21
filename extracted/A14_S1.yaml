@@ -1,0 +1,46 @@
+contract_id: CodeSummarizationAgent_v1.0
+tin:
+  type: object
+  properties:
+    repo: 
+      type: string
+    problem_statement: 
+      type: string
+    function_code: 
+      type: string
+  required: 
+    - function_code
+pre:
+  structural: function_code != ""
+  semantic: []
+post:
+  structural: |
+    typeof(output["Purpose"]) == 'string' &&
+    Array.isArray(output["Inputs"]) &&
+    typeof(output["Outputs"]) == 'string' &&
+    typeof(output["Edge cases handled"]) == 'string' &&
+    typeof(output["Calls"]) == 'string' &&
+    typeof(output["Notes"]) == 'string'
+  semantic: [@function_summary_is_clear_and_accurate, @inputs_and_outputs_are_correctly_identified]
+tout:
+  type: object
+  properties:
+    Purpose:
+      type: string
+    Inputs: 
+      type: array
+    Outputs:
+      type: string
+    Edge cases handled:
+      type: string
+    Calls:
+      type: string
+    Notes:
+      type: string
+prob:
+  satisfaction_rate: 0.87
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

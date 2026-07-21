@@ -1,0 +1,37 @@
+contract_id: VerifierAgentV1
+tin:
+  type: object
+  properties:
+    working_dir:
+      type: string
+    problem_statement:
+      type: string
+    patch:
+      type: string
+  required:
+    - working_dir
+    - problem_statement
+    - patch
+pre:
+  structural: "working_dir != '' and patch != ''"
+  semantic: 
+    - @understand_issue_intent
+    - @verify_patch_application
+    - @identify_relevant_tests
+post:
+  structural: "output != ''"
+  semantic: 
+    - @correct_verification_outcome
+    - @test_pass_fail_evaluation
+tout:
+  type: object
+  properties:
+    verification_result:
+      type: string
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

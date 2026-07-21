@@ -1,0 +1,29 @@
+contract_id: OpenHandsCodeWriter-v1
+tin:
+  type: object
+  properties: 
+    - conversation_state: list
+  required: 
+    - conversation_state
+pre:
+  structural: "len(input.conversation_state) > 0"
+  semantic: 
+    - @SystemPromptEventWithinFirstTwo
+    - @UserMessageAfterSystemPrompt
+post:
+  structural: "output is not None"
+  semantic: 
+    - @StateMutatedCorrectly
+    - @ExecutionStatusCheck
+tout:
+  type: object
+  properties: 
+    - conversation_state: list
+    - execution_status: string
+prob:
+  satisfaction_rate: 0.67
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

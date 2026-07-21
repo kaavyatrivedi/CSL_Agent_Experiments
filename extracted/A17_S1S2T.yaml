@@ -1,0 +1,30 @@
+contract_id: Replit_Assistant_v1
+tin:
+  type: object
+  properties:
+    message: string
+    project_type: string
+    agent_mode: string
+    turbo: boolean
+    high_effort: boolean
+    plan_mode: boolean
+  required:
+    - message
+    - agent_mode
+pre:
+  structural: "(turbo implies agent_mode == 'Power')"
+  semantic: ["@validate_project_type", "@check_plan_mode_needs"]
+post:
+  structural: true
+  semantic: ["@generate_interactive_project", "@handle_workspace_tools"]
+tout:
+  type: object
+  properties:
+    interactive_project: any
+prob:
+  satisfaction_rate: 0.5
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

@@ -1,0 +1,52 @@
+contract_id: v0-0
+tin:
+  type: object
+  properties:
+    message: string
+    system: string
+    modelId: string
+    chatPrivacy: string
+    projectId: string
+  required:
+    - message
+pre:
+  structural: "message != null"
+  semantic: 
+    - @valid_message_structure
+post:
+  structural: "id != null && webUrl != null && latestVersion != null && messages != null"
+  semantic:
+    - @output_contains_valid_chat_object
+tout:
+  type: object
+  properties:
+    id: string
+    webUrl: string
+    latestVersion: 
+      type: object
+      properties:
+        id: string
+        status: string
+        demoUrl: string
+        files: 
+          type: array
+          items:
+            type: object
+            properties:
+              name: string
+              content: string
+    messages:
+      type: array
+      items:
+        type: object
+        properties:
+          role: string
+          content: string
+          finishReason: string
+prob:
+  satisfaction_rate: 0.83
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

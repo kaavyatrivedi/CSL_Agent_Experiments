@@ -1,0 +1,34 @@
+contract_id: TestSuiteExecutorAgent-v1
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+    test_suite: string
+    patch: string
+  required:
+    - repo
+    - problem_statement
+    - test_suite
+pre:
+  structural: "repo && problem_statement && test_suite"
+  semantic: ["@valid_repository_format", "@meaningful_problem_statement"]
+post:
+  structural: "output.includes('Overall verdict') && output.includes('Results:')"
+  semantic: ["@accurate_test_simulation", "@comprehensive_test_result_reporting"]
+tout:
+  type: object
+  properties:
+    Overall_verdict: string
+    Tests_passed: integer
+    Tests_failed: integer
+    Tests_skipped: integer
+    Tests_unknown: integer
+    Results: array
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

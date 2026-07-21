@@ -1,0 +1,29 @@
+contract_id: AgentMode_1.0
+tin:
+  type: object
+  properties:
+    terminal_commands: 
+      type: string
+    file_paths: 
+      type: string
+  required:
+    - terminal_commands
+    - file_paths
+pre:
+  structural: "terminal_commands && file_paths"
+  semantic: [@validate_terminal_environment, @check_file_path_formatting]
+post:
+  structural: "output_format == 'fenced_code_blocks'"
+  semantic: [@safe_command_execution, @correct_output_formatting]
+tout:
+  type: object
+  properties:
+    output_format:
+      type: string
+prob:
+  satisfaction_rate: 0.73
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT
