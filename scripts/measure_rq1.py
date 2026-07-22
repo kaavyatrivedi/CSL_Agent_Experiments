@@ -22,6 +22,13 @@ Changes from the original version:
   - Every printed cell reports its own N, since failures/missing files
     can make N differ column to column.
   - A structured failure log is written to results/rq1_failures.json.
+  - Agents whose ground-truth tout.properties is empty (their output is
+    unstructured/free-form, e.g. code, UI components, shell scripts --
+    currently A02, A05, A07, A08, A10, A15-A20) are EXCLUDED from the
+    tout N rather than scored as 0.0. There's nothing in the ground
+    truth for them to match against, so scoring them as failures
+    penalized extraction for a comparison that was never well-defined.
+    A structured exclusion log is written to results/rq1_excluded.json.
 
 Ground truth source: ground_truth/AXX_contract_R1.yaml (Researcher 1
 only -- not the 3-annotator FINAL consensus). Agent range: A01-A20 only.
@@ -218,6 +225,7 @@ def main():
     gt_contracts = {}   # aid -> parsed gt dict
     ex_contracts = {}   # (aid, cfg) -> parsed ex dict
     failures = []       # [{agent, config, field, error}, ...]
+    excluded = []        # [{agent, config, field, reason}, ...] -- not errors, deliberate N exclusions
 
     for i in AGENT_RANGE:
         aid = f'A{i:02d}'
@@ -281,7 +289,14 @@ def main():
                 failures.append({'agent': aid, 'config': cfg, 'field': 'tin', 'error': str(e)})
 
             try:
-                results[cfg]['tout'].append(tout_score(ex.get('tout'), gt.get('tout')))
+                if not get_prop_names(gt.get('tout')):
+                    excluded.append({
+                        'agent': aid, 'config': cfg, 'field': 'tout',
+                        'reason': 'ground-truth tout.properties is empty (unstructured/'
+                                  'free-form output) -- excluded from N, not scored as 0',
+                    })
+                else:
+                    results[cfg]['tout'].append(tout_score(ex.get('tout'), gt.get('tout')))
             except Exception as e:
                 failures.append({'agent': aid, 'config': cfg, 'field': 'tout', 'error': str(e)})
 
@@ -329,6 +344,21 @@ def main():
 
     with open('results/rq1_failures.json', 'w', encoding='utf-8') as f:
         json.dump(failures, f, indent=2)
+
+    # --- Deliberate exclusions (not failures) ---
+    print(f'\n===== EXCLUDED FROM N ({len(excluded)} total) =====')
+    if excluded:
+        by_field = {}
+        for e in excluded:
+            by_field[e['field']] = by_field.get(e['field'], 0) + 1
+        for field, count in sorted(by_field.items()):
+            print(f'  {field}: {count} (agents with no ground-truth schema to compare against)')
+        print('  Full details written to results/rq1_excluded.json')
+    else:
+        print('  none')
+
+    with open('results/rq1_excluded.json', 'w', encoding='utf-8') as f:
+        json.dump(excluded, f, indent=2)
 
 
 if __name__ == '__main__':

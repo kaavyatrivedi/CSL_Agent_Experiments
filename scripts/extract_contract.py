@@ -3,6 +3,11 @@ Extraction pipeline: given agent documentation, produces a CSL-Agent contract.
 
 Runs 3 configurations: S1 only, S1+S2, S1+S2+traces.
 (The 4th, +human, is done manually in Step 3.3 — not part of this script.)
+
+If adapting the extraction prompt, make sure to change the directory to which extracted 
+YAML files are written (search 'extracted') so that the new prompt's results don't 
+overwrite the old ones. The old results are used in the RQ1 analysis, so they must be preserved.
+
 """
 
 import openai, json, yaml, os, time, re
@@ -116,7 +121,7 @@ def extract_contract(agent_id, use_docs=False, use_traces=False, sat_rate=0.0):
 
 if __name__ == '__main__':
     # Make sure the output directory exists instead of assuming it does.
-    os.makedirs('extracted', exist_ok=True)
+    os.makedirs('extracted_original', exist_ok=True)
 
     from scripts.compute_prob import compute_prob_field
 
@@ -132,7 +137,7 @@ if __name__ == '__main__':
         ]
 
         for cfg_name, use_docs, use_traces in configs:
-            out_path = f'extracted/{aid}_{cfg_name}.yaml'
+            out_path = f'extracted_original/{aid}_{cfg_name}.yaml'
             if os.path.exists(out_path):
                 print(f'Skipping {aid} config {cfg_name} (already extracted)')
                 continue
