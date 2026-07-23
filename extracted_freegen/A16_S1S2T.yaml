@@ -1,0 +1,36 @@
+contract_id: LovableAIEditor_v1
+
+tin:
+  type: object
+  properties:
+    chat_input: string
+    images: array
+  required:
+    - chat_input
+
+pre:
+  structural: chat_input != ""
+  semantic: 
+    - '@input_is_app_description'
+    - '@input_is_code_specification'
+
+post:
+  structural: code_preview != null
+  semantic: 
+    - '@output_is_web_app_code'
+    - '@output_is_react_component'
+
+tout:
+  type: object
+  properties:
+    code_preview: string
+    live_update_url: string
+
+prob:
+  satisfaction_rate: 0.4
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONCAT

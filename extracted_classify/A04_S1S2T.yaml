@@ -1,0 +1,21 @@
+contract_id: OpenHandsCodeWriter_v1
+
+tin:
+  type: object
+  properties:
+    spec: string
+  required:
+    - spec
+
+pre:
+  structural: true
+  semantic: ['@input_is_code_specification']
+
+post:
+  structural: true
+  semantic: ['@output_is_code_file']
+
+tout:
+  type: object
+  properties:
+    code_files: array

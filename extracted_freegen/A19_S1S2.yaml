@@ -1,0 +1,39 @@
+contract_id: kiro-1.0
+
+tin:
+  type: object
+  properties:
+    work_type: 
+      type: string
+  required:
+    - work_type
+
+pre:
+  structural: work_type == 'Feature' or work_type == 'Bug'
+  semantic: 
+    - '@input_is_feature_description'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_requirements_spec'
+    - '@output_is_code_file'
+
+tout:
+  type: object
+  properties:
+    requirements_file:
+      type: string
+    design_file:
+      type: string
+    tasks_file:
+      type: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONSENSUS

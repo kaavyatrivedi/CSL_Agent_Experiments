@@ -1,0 +1,41 @@
+contract_id: RootCauseAnalyzer_v1
+
+tin:
+  type: object
+  properties:
+    stack_trace:
+      type: string
+    repo:
+      type: string
+  required: [stack_trace, repo]
+
+pre:
+  structural: stack_trace is not None and repo is not None
+  semantic: 
+    - '@input_is_stack_trace'
+
+post:
+  structural: output != None
+  semantic: 
+    - '@output_is_root_cause_analysis'
+
+tout:
+  type: object
+  properties:
+    error_type:
+      type: string
+    root_cause_location:
+      type: string
+    explanation:
+      type: string
+    alternatives:
+      type: string
+
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: RESOLVE

@@ -1,0 +1,34 @@
+contract_id: "root_cause_analysis_agent_v1"
+
+tin:
+  type: object
+  properties:
+    stack_trace: string
+    repo: string
+  required:
+    - stack_trace
+    - repo
+
+pre:
+  structural: "stack_trace != '' and repo != ''"
+  semantic: 
+    - "@input_is_stack_trace"
+
+post:
+  structural: "output.startswith('ROOT CAUSE ANALYSIS:')"
+  semantic:
+    - "@output_is_root_cause_analysis"
+
+tout:
+  type: object
+  properties:
+    ROOT CAUSE ANALYSIS: string
+
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

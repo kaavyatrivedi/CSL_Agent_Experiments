@@ -79,7 +79,7 @@ def load_contract(path):
 
 def diagnose_pair(aid, cfg, cache):
     gt = load_contract(f'ground_truth/{aid}_contract_R1.yaml')
-    ex = load_contract(f'extracted/{aid}_{cfg}.yaml')
+    ex = load_contract(f'extracted_freegen/{aid}_{cfg}.yaml')
     if gt is None or ex is None:
         return None
 
@@ -138,7 +138,7 @@ def main():
     for aid in agents:
         for cfg in configs:
             gt = load_contract(f'ground_truth/{aid}_contract_R1.yaml')
-            ex = load_contract(f'extracted/{aid}_{cfg}.yaml')
+            ex = load_contract(f'extracted_freegen/{aid}_{cfg}.yaml')
             if gt:
                 all_preds.update(get_semantic(gt, 'pre'))
                 all_preds.update(get_semantic(gt, 'post'))
@@ -155,10 +155,10 @@ def main():
                 report.append(entry)
 
     Path('results').mkdir(exist_ok=True)
-    with open('results/rq1_diagnostics.json', 'w', encoding='utf-8') as f:
+    with open('results/rq1_diagnostics_freegen.json', 'w', encoding='utf-8') as f:
         json.dump(report, f, indent=2)
 
-    print(f'Wrote {len(report)} agent/config diagnostics to results/rq1_diagnostics.json\n')
+    print(f'Wrote {len(report)} agent/config diagnostics to results/rq1_diagnostics_freegen.json\n')
 
     structural_tout_flags = sum(1 for e in report if 'note' in e['tout'])
     print(f'tout: {structural_tout_flags}/{len(report)} pairs show zero top-level overlap '

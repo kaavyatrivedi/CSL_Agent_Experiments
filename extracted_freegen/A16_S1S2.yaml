@@ -1,0 +1,41 @@
+contract_id: LovableAIEditor-v1
+tin:
+  type: object
+  properties:
+    prompt: 
+      type: string
+    images:
+      type: array
+      items:
+        type: string
+  required: 
+    - prompt
+
+pre:
+  structural: 'prompt is not None'
+  semantic: 
+    - '@input_is_app_description'
+    - '@input_is_ui_description'
+
+post:
+  structural: 'output is not None'
+  semantic: 
+    - '@output_is_web_app_code'
+    - '@output_is_react_component'
+
+tout:
+  type: object
+  properties:
+    interactive_session:
+      type: boolean
+    github_sync:
+      type: boolean
+
+prob:
+  satisfaction_rate: 0.4
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONCAT

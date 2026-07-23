@@ -1,0 +1,49 @@
+contract_id: TestReportAgent_v1
+
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+    test_suite: string
+    patch: string
+  required: 
+    - repo
+    - test_suite
+
+pre:
+  structural: "repo != '' and test_suite != ''"
+  semantic: 
+    - '@input_is_test_suite'
+
+post:
+  structural: "true"
+  semantic: 
+    - '@output_is_test_run_report'
+
+tout:
+  type: object
+  properties:
+    overall_verdict: string
+    tests_passed: integer
+    tests_failed: integer
+    tests_skipped: integer
+    tests_unknown: integer
+    results: 
+      type: array
+      items: 
+        type: string
+    failure_details: 
+      type: array
+      items: 
+        type: string
+    summary: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: RESOLVE

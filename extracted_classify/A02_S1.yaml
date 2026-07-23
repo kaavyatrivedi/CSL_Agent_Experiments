@@ -1,0 +1,32 @@
+contract_id: "PatchGenerator-v1"
+tin:
+  type: object
+  properties:
+    problem_statement: string
+    localised_file: string
+    working_dir: string
+  required: 
+    - problem_statement
+    - localised_file
+    - working_dir
+pre:
+  structural: "problem_statement and localised_file and working_dir"
+  semantic: 
+    - '@input_is_github_issue'
+    - '@input_has_file_location'
+post:
+  structural: "output starts with '--- ' and contains '+ ' for additions"
+  semantic:
+    - '@output_is_valid_patch'
+    - '@output_preserves_test_files'
+tout:
+  type: object
+  properties:
+    output: string
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

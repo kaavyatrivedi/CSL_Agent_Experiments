@@ -1,0 +1,33 @@
+contract_id: OpenHandsTestGen-2023.10.1
+
+tin:
+  type: object
+  properties:
+    function_or_spec: string
+  required:
+    - function_or_spec
+
+pre:
+  structural: true
+  semantic: 
+    - '@input_is_code_function'
+
+post:
+  structural: true
+  semantic:
+    - '@output_preserves_test_files'
+
+tout:
+  type: object
+  properties:
+    path_to_test_file: string
+    test_code: string
+
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: MERGE

@@ -1,0 +1,3031 @@
+[
+  {
+    "agent": "A01",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [
+        "confidence",
+        "file",
+        "line",
+        "reason"
+      ],
+      "ex_properties": [
+        "File",
+        "Reason"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_github_issue"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_has_file_location"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_github_issue",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_localisation_result"
+      ],
+      "extracted_predicates": [
+        "@output_is_localisation_result"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_localisation_result",
+          "best_extracted_match": "@output_is_localisation_result",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A01",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [
+        "confidence",
+        "file",
+        "line",
+        "reason"
+      ],
+      "ex_properties": [
+        "localisation_result"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {
+        "localisation_result": [
+          "File",
+          "Reason"
+        ]
+      }
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_github_issue"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_has_file_location"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_github_issue",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_localisation_result"
+      ],
+      "extracted_predicates": [
+        "@output_is_localisation_result"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_localisation_result",
+          "best_extracted_match": "@output_is_localisation_result",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A01",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [
+        "confidence",
+        "file",
+        "line",
+        "reason"
+      ],
+      "ex_properties": [
+        "localisation_result"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {
+        "localisation_result": [
+          "File",
+          "Reason"
+        ]
+      }
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_github_issue"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_github_issue",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_localisation_result"
+      ],
+      "extracted_predicates": [
+        "@output_is_localisation_result"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_localisation_result",
+          "best_extracted_match": "@output_is_localisation_result",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A02",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "output"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_has_file_location"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_has_file_location"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_has_file_location",
+          "best_extracted_match": "@input_has_file_location",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_valid_patch",
+        "@output_preserves_test_files"
+      ],
+      "extracted_predicates": [
+        "@output_is_valid_patch",
+        "@output_preserves_test_files"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_valid_patch",
+          "best_extracted_match": "@output_is_valid_patch",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_preserves_test_files",
+          "best_extracted_match": "@output_preserves_test_files",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A02",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "diff_block"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_has_file_location"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_has_file_location"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_has_file_location",
+          "best_extracted_match": "@input_has_file_location",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_valid_patch",
+        "@output_preserves_test_files"
+      ],
+      "extracted_predicates": [
+        "@output_is_valid_patch"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_valid_patch",
+          "best_extracted_match": "@output_is_valid_patch",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_preserves_test_files",
+          "best_extracted_match": "@output_is_valid_patch",
+          "similarity": 0.438,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A02",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "patch"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_has_file_location"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_has_file_location"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_has_file_location",
+          "best_extracted_match": "@input_has_file_location",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_valid_patch",
+        "@output_preserves_test_files"
+      ],
+      "extracted_predicates": [
+        "@output_is_valid_patch"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_valid_patch",
+          "best_extracted_match": "@output_is_valid_patch",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_preserves_test_files",
+          "best_extracted_match": "@output_is_valid_patch",
+          "similarity": 0.438,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A03",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [
+        "details",
+        "verdict"
+      ],
+      "ex_properties": [
+        "Edge_cases_missed",
+        "Overall_reasoning",
+        "Tests_evaluated",
+        "Verdict"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_patch_and_tests"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_is_patch_and_tests"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_patch_and_tests",
+          "best_extracted_match": "@input_is_patch_and_tests",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_verification_result"
+      ],
+      "extracted_predicates": [
+        "@output_is_verification_result"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_verification_result",
+          "best_extracted_match": "@output_is_verification_result",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A03",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [
+        "details",
+        "verdict"
+      ],
+      "ex_properties": [
+        "verification_result"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_patch_and_tests"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_is_patch_and_tests"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_patch_and_tests",
+          "best_extracted_match": "@input_is_patch_and_tests",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_verification_result"
+      ],
+      "extracted_predicates": [
+        "@output_is_verification_result"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_verification_result",
+          "best_extracted_match": "@output_is_verification_result",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A03",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [
+        "details",
+        "verdict"
+      ],
+      "ex_properties": [
+        "edge_cases_missed",
+        "overall_reasoning",
+        "tests_evaluated",
+        "verdict"
+      ],
+      "top_level_overlap": [
+        "verdict"
+      ],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_patch_and_tests"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_is_patch_and_tests"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_patch_and_tests",
+          "best_extracted_match": "@input_is_patch_and_tests",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_verification_result"
+      ],
+      "extracted_predicates": [
+        "@output_is_verification_result"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_verification_result",
+          "best_extracted_match": "@output_is_verification_result",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A04",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [
+        "code",
+        "file"
+      ],
+      "ex_properties": [
+        "file_content",
+        "file_path"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_specification"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_specification"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_specification",
+          "best_extracted_match": "@input_is_code_specification",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_code_file"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_file"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_code_file",
+          "best_extracted_match": "@output_is_code_file",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A04",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [
+        "code",
+        "file"
+      ],
+      "ex_properties": [
+        "file_contents",
+        "file_path"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_specification"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_specification"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_specification",
+          "best_extracted_match": "@input_is_code_specification",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_code_file"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_file"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_code_file",
+          "best_extracted_match": "@output_is_code_file",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A04",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [
+        "code",
+        "file"
+      ],
+      "ex_properties": [
+        "code_files"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_specification"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_specification"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_specification",
+          "best_extracted_match": "@input_is_code_specification",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_code_file"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_file"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_code_file",
+          "best_extracted_match": "@output_is_code_file",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A05",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "relevant_files"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {
+        "relevant_files": [
+          "path",
+          "relevance"
+        ]
+      }
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_file_search_query"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_file_search_query",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 0.463,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_file_list"
+      ],
+      "extracted_predicates": [
+        "@output_is_file_list"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_file_list",
+          "best_extracted_match": "@output_is_file_list",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A05",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "relevant_files"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {
+        "relevant_files": [
+          "path",
+          "relevance_explanation"
+        ]
+      }
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_file_search_query"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_file_search_query",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 0.463,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_file_list"
+      ],
+      "extracted_predicates": [
+        "@output_is_file_list"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_file_list",
+          "best_extracted_match": "@output_is_file_list",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A05",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "relevant_files"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_file_search_query"
+      ],
+      "extracted_predicates": [
+        "@input_is_file_search_query",
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_file_search_query",
+          "best_extracted_match": "@input_is_file_search_query",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_file_list"
+      ],
+      "extracted_predicates": [
+        "@output_is_file_list"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_file_list",
+          "best_extracted_match": "@output_is_file_list",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A06",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [
+        "code",
+        "file"
+      ],
+      "ex_properties": [
+        "relative_path_to_test_file"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_specification"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_specification"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_specification",
+          "best_extracted_match": "@input_is_code_specification",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_code_file"
+      ],
+      "extracted_predicates": [
+        "@output_preserves_test_files",
+        "@output_is_code_file"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_code_file",
+          "best_extracted_match": "@output_is_code_file",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A06",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [
+        "code",
+        "file"
+      ],
+      "ex_properties": [
+        "path_to_test_file",
+        "test_code"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_specification"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_function"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_specification",
+          "best_extracted_match": "@input_is_code_function",
+          "similarity": 0.766,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_code_file"
+      ],
+      "extracted_predicates": [
+        "@output_preserves_test_files"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_code_file",
+          "best_extracted_match": "@output_preserves_test_files",
+          "similarity": 0.503,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A06",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [
+        "code",
+        "file"
+      ],
+      "ex_properties": [],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_specification"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_function"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_specification",
+          "best_extracted_match": "@input_is_code_function",
+          "similarity": 0.766,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_code_file"
+      ],
+      "extracted_predicates": [
+        "@output_is_verification_result"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_code_file",
+          "best_extracted_match": "@output_is_verification_result",
+          "similarity": 0.593,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A07",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_and_instructions",
+          "best_extracted_match": "@input_is_code_and_instructions",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_search_replace_block",
+        "@output_has_filepath_before_block"
+      ],
+      "extracted_predicates": [
+        "@output_is_search_replace_block"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_search_replace_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_has_filepath_before_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 0.52,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A07",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "output_format"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_and_instructions",
+          "best_extracted_match": "@input_is_code_and_instructions",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_search_replace_block",
+        "@output_has_filepath_before_block"
+      ],
+      "extracted_predicates": [
+        "@output_is_search_replace_block"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_search_replace_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_has_filepath_before_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 0.52,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A07",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "edits",
+        "format"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {
+        "edits": [
+          "content",
+          "filepath"
+        ]
+      }
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_and_instructions",
+          "best_extracted_match": "@input_is_code_and_instructions",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_search_replace_block",
+        "@output_has_filepath_before_block"
+      ],
+      "extracted_predicates": [
+        "@output_is_search_replace_block"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_search_replace_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_has_filepath_before_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 0.52,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A08",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "search_replace_blocks"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_and_instructions",
+          "best_extracted_match": "@input_is_code_and_instructions",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_search_replace_block",
+        "@output_has_filepath_before_block"
+      ],
+      "extracted_predicates": [
+        "@output_is_search_replace_block"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_search_replace_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_has_filepath_before_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 0.52,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A08",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "extracted_predicates": [
+        "@input_has_file_location"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_and_instructions",
+          "best_extracted_match": "@input_has_file_location",
+          "similarity": 0.488,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_search_replace_block",
+        "@output_has_filepath_before_block"
+      ],
+      "extracted_predicates": [
+        "@output_is_search_replace_block"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_search_replace_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_has_filepath_before_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 0.52,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A08",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "file_path",
+        "search_replace_blocks"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {
+        "search_replace_blocks": [
+          "replace",
+          "search"
+        ]
+      }
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_and_instructions"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_and_instructions",
+          "best_extracted_match": "@input_is_code_and_instructions",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_search_replace_block",
+        "@output_has_filepath_before_block"
+      ],
+      "extracted_predicates": [
+        "@output_is_search_replace_block"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_search_replace_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_has_filepath_before_block",
+          "best_extracted_match": "@output_is_search_replace_block",
+          "similarity": 0.52,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A09",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [
+        "file",
+        "line",
+        "root_cause"
+      ],
+      "ex_properties": [
+        "alternatives",
+        "error_type",
+        "explanation",
+        "root_cause_location"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_stack_trace"
+      ],
+      "extracted_predicates": [
+        "@input_is_stack_trace"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_stack_trace",
+          "best_extracted_match": "@input_is_stack_trace",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_root_cause_analysis"
+      ],
+      "extracted_predicates": [
+        "@output_is_root_cause_analysis"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_root_cause_analysis",
+          "best_extracted_match": "@output_is_root_cause_analysis",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A09",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [
+        "file",
+        "line",
+        "root_cause"
+      ],
+      "ex_properties": [
+        "ROOT CAUSE ANALYSIS"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_stack_trace"
+      ],
+      "extracted_predicates": [
+        "@input_is_stack_trace"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_stack_trace",
+          "best_extracted_match": "@input_is_stack_trace",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_root_cause_analysis"
+      ],
+      "extracted_predicates": [
+        "@output_is_root_cause_analysis"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_root_cause_analysis",
+          "best_extracted_match": "@output_is_root_cause_analysis",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A09",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [
+        "file",
+        "line",
+        "root_cause"
+      ],
+      "ex_properties": [
+        "alternatives",
+        "error_type",
+        "explanation",
+        "root_cause_location"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_stack_trace"
+      ],
+      "extracted_predicates": [
+        "@input_is_stack_trace"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_stack_trace",
+          "best_extracted_match": "@input_is_stack_trace",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_root_cause_analysis"
+      ],
+      "extracted_predicates": [
+        "@output_is_root_cause_analysis"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_root_cause_analysis",
+          "best_extracted_match": "@output_is_root_cause_analysis",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A10",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "output"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_has_file_location"
+      ],
+      "extracted_predicates": [
+        "@input_is_multiple_patches"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_has_file_location",
+          "best_extracted_match": "@input_is_multiple_patches",
+          "similarity": 0.466,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_valid_patch"
+      ],
+      "extracted_predicates": [
+        "@output_is_merged_patch"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_valid_patch",
+          "best_extracted_match": "@output_is_merged_patch",
+          "similarity": 0.808,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A10",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "output"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_has_file_location"
+      ],
+      "extracted_predicates": [
+        "@input_is_multiple_patches"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_has_file_location",
+          "best_extracted_match": "@input_is_multiple_patches",
+          "similarity": 0.466,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_valid_patch"
+      ],
+      "extracted_predicates": [
+        "@output_is_merged_patch"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_valid_patch",
+          "best_extracted_match": "@output_is_merged_patch",
+          "similarity": 0.808,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A10",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "merged_patch"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_has_file_location"
+      ],
+      "extracted_predicates": [
+        "@input_is_multiple_patches"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_has_file_location",
+          "best_extracted_match": "@input_is_multiple_patches",
+          "similarity": 0.466,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_valid_patch"
+      ],
+      "extracted_predicates": [
+        "@output_is_merged_patch"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_valid_patch",
+          "best_extracted_match": "@output_is_merged_patch",
+          "similarity": 0.808,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A11",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [
+        "conflicts",
+        "patch",
+        "resolution"
+      ],
+      "ex_properties": [
+        "merged_patch"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_multiple_patches"
+      ],
+      "extracted_predicates": [
+        "@input_is_multiple_patches"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_multiple_patches",
+          "best_extracted_match": "@input_is_multiple_patches",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_valid_patch",
+        "@output_is_merged_patch"
+      ],
+      "extracted_predicates": [
+        "@output_is_merged_patch"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_valid_patch",
+          "best_extracted_match": "@output_is_merged_patch",
+          "similarity": 0.808,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_is_merged_patch",
+          "best_extracted_match": "@output_is_merged_patch",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A11",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [
+        "conflicts",
+        "patch",
+        "resolution"
+      ],
+      "ex_properties": [
+        "merged_patch"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_multiple_patches"
+      ],
+      "extracted_predicates": [
+        "@input_is_multiple_patches"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_multiple_patches",
+          "best_extracted_match": "@input_is_multiple_patches",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_valid_patch",
+        "@output_is_merged_patch"
+      ],
+      "extracted_predicates": [
+        "@output_is_merged_patch"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_valid_patch",
+          "best_extracted_match": "@output_is_merged_patch",
+          "similarity": 0.808,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_is_merged_patch",
+          "best_extracted_match": "@output_is_merged_patch",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A11",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [
+        "conflicts",
+        "patch",
+        "resolution"
+      ],
+      "ex_properties": [
+        "merged_patch"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_multiple_patches"
+      ],
+      "extracted_predicates": [
+        "@input_is_multiple_patches"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_multiple_patches",
+          "best_extracted_match": "@input_is_multiple_patches",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_valid_patch",
+        "@output_is_merged_patch"
+      ],
+      "extracted_predicates": [
+        "@output_is_merged_patch"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_valid_patch",
+          "best_extracted_match": "@output_is_merged_patch",
+          "similarity": 0.808,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@output_is_merged_patch",
+          "best_extracted_match": "@output_is_merged_patch",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A12",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [
+        "results",
+        "summary",
+        "verdict"
+      ],
+      "ex_properties": [
+        "failure_details",
+        "overall_verdict",
+        "results",
+        "summary",
+        "tests_failed",
+        "tests_passed",
+        "tests_skipped",
+        "tests_unknown"
+      ],
+      "top_level_overlap": [
+        "results",
+        "summary"
+      ],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_test_suite"
+      ],
+      "extracted_predicates": [
+        "@input_is_test_suite"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_test_suite",
+          "best_extracted_match": "@input_is_test_suite",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_test_run_report"
+      ],
+      "extracted_predicates": [
+        "@output_is_test_run_report"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_test_run_report",
+          "best_extracted_match": "@output_is_test_run_report",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A12",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [
+        "results",
+        "summary",
+        "verdict"
+      ],
+      "ex_properties": [
+        "failure_details",
+        "overall_verdict",
+        "results",
+        "summary",
+        "tests_failed",
+        "tests_passed",
+        "tests_skipped",
+        "tests_unknown"
+      ],
+      "top_level_overlap": [
+        "results",
+        "summary"
+      ],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_test_suite"
+      ],
+      "extracted_predicates": [
+        "@input_is_test_suite"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_test_suite",
+          "best_extracted_match": "@input_is_test_suite",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_test_run_report"
+      ],
+      "extracted_predicates": [
+        "@output_is_test_run_report"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_test_run_report",
+          "best_extracted_match": "@output_is_test_run_report",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A12",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [
+        "results",
+        "summary",
+        "verdict"
+      ],
+      "ex_properties": [
+        "failure_details",
+        "overall_verdict",
+        "results",
+        "summary",
+        "tests_failed",
+        "tests_passed",
+        "tests_skipped",
+        "tests_unknown"
+      ],
+      "top_level_overlap": [
+        "results",
+        "summary"
+      ],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_test_suite"
+      ],
+      "extracted_predicates": [
+        "@input_is_test_suite"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_test_suite",
+          "best_extracted_match": "@input_is_test_suite",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_test_run_report"
+      ],
+      "extracted_predicates": [
+        "@output_is_test_run_report"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_test_run_report",
+          "best_extracted_match": "@output_is_test_run_report",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A13",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [
+        "actual_behavior",
+        "components",
+        "expected_behaviour"
+      ],
+      "ex_properties": [
+        "actual_behaviour",
+        "additional_context",
+        "affected_components",
+        "environment",
+        "error_type",
+        "expected_behaviour",
+        "reproduction_steps",
+        "title"
+      ],
+      "top_level_overlap": [
+        "expected_behaviour"
+      ],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_github_issue"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_github_issue",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_parsed_issue"
+      ],
+      "extracted_predicates": [
+        "@output_is_parsed_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_parsed_issue",
+          "best_extracted_match": "@output_is_parsed_issue",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A13",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [
+        "actual_behavior",
+        "components",
+        "expected_behaviour"
+      ],
+      "ex_properties": [
+        "Actual_behaviour",
+        "Additional_context",
+        "Affected_components",
+        "Environment",
+        "Error_type",
+        "Expected_behaviour",
+        "Reproduction_steps",
+        "Title"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_github_issue"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_github_issue",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_parsed_issue"
+      ],
+      "extracted_predicates": [
+        "@output_is_parsed_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_parsed_issue",
+          "best_extracted_match": "@output_is_parsed_issue",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A13",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [
+        "actual_behavior",
+        "components",
+        "expected_behaviour"
+      ],
+      "ex_properties": [
+        "actual_behaviour",
+        "additional_context",
+        "affected_components",
+        "environment",
+        "error_type",
+        "expected_behaviour",
+        "reproduction_steps",
+        "title"
+      ],
+      "top_level_overlap": [
+        "expected_behaviour"
+      ],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_github_issue"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_github_issue",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_parsed_issue"
+      ],
+      "extracted_predicates": [
+        "@output_is_parsed_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_parsed_issue",
+          "best_extracted_match": "@output_is_parsed_issue",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A14",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [
+        "inputs",
+        "outputs",
+        "purpose"
+      ],
+      "ex_properties": [
+        "calls",
+        "edge_cases_handled",
+        "inputs",
+        "notes",
+        "outputs",
+        "purpose"
+      ],
+      "top_level_overlap": [
+        "inputs",
+        "outputs",
+        "purpose"
+      ],
+      "ex_nested_array_properties": {
+        "inputs": [
+          "parameter_name",
+          "role",
+          "type"
+        ]
+      }
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_function"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_function"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_function",
+          "best_extracted_match": "@input_is_code_function",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_code_summary"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_summary"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_code_summary",
+          "best_extracted_match": "@output_is_code_summary",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A14",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [
+        "inputs",
+        "outputs",
+        "purpose"
+      ],
+      "ex_properties": [
+        "Calls",
+        "Edge_cases_handled",
+        "Inputs",
+        "Notes",
+        "Outputs",
+        "Purpose"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_function"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_function"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_function",
+          "best_extracted_match": "@input_is_code_function",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_code_summary"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_summary"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_code_summary",
+          "best_extracted_match": "@output_is_code_summary",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A14",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [
+        "inputs",
+        "outputs",
+        "purpose"
+      ],
+      "ex_properties": [
+        "Calls",
+        "Edge_cases_handled",
+        "Inputs",
+        "Notes",
+        "Outputs",
+        "Purpose"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_code_function"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_function"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_code_function",
+          "best_extracted_match": "@input_is_code_function",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_code_summary"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_summary"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_code_summary",
+          "best_extracted_match": "@output_is_code_summary",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A15",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "code_patch",
+        "debug_messages"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_ui_description"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_has_file_location"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_ui_description",
+          "best_extracted_match": "@input_has_file_location",
+          "similarity": 0.469,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_react_component"
+      ],
+      "extracted_predicates": [
+        "@output_is_valid_patch",
+        "@output_preserves_test_files"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_react_component",
+          "best_extracted_match": "@output_is_valid_patch",
+          "similarity": 0.487,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A15",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "id",
+        "latestVersion",
+        "messages",
+        "webUrl"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {
+        "messages": [
+          "content",
+          "finishReason",
+          "role"
+        ]
+      }
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_ui_description"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_ui_description",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 0.451,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_react_component"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_patch"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_react_component",
+          "best_extracted_match": "@output_is_code_patch",
+          "similarity": 0.505,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A15",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "id",
+        "latestVersion",
+        "messages",
+        "webUrl"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {
+        "messages": [
+          "content",
+          "finishReason",
+          "role"
+        ]
+      }
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_ui_description"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue",
+        "@input_has_file_location"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_ui_description",
+          "best_extracted_match": "@input_has_file_location",
+          "similarity": 0.469,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_react_component"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_file",
+        "@output_is_parsed_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_react_component",
+          "best_extracted_match": "@output_is_code_file",
+          "similarity": 0.579,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A16",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "code_output",
+        "explanation"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_app_description"
+      ],
+      "extracted_predicates": [
+        "@input_is_app_description",
+        "@input_is_code_and_instructions"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_app_description",
+          "best_extracted_match": "@input_is_app_description",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_web_app_code"
+      ],
+      "extracted_predicates": [
+        "@output_is_web_app_code",
+        "@output_is_code_file"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_web_app_code",
+          "best_extracted_match": "@output_is_web_app_code",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A16",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "session_url"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_app_description"
+      ],
+      "extracted_predicates": [
+        "@input_is_app_description"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_app_description",
+          "best_extracted_match": "@input_is_app_description",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_web_app_code"
+      ],
+      "extracted_predicates": [
+        "@output_is_web_app_code"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_web_app_code",
+          "best_extracted_match": "@output_is_web_app_code",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A16",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "live_editable_app",
+        "preview_url"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_app_description"
+      ],
+      "extracted_predicates": [
+        "@input_is_ui_description",
+        "@input_is_app_description"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_app_description",
+          "best_extracted_match": "@input_is_app_description",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_web_app_code"
+      ],
+      "extracted_predicates": [
+        "@output_is_web_app_code"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_web_app_code",
+          "best_extracted_match": "@output_is_web_app_code",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A17",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "natural_language_response",
+        "proposed_file_changes",
+        "proposed_shell_commands"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_runnable_app_spec"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_specification",
+        "@input_is_terminal_task"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_runnable_app_spec",
+          "best_extracted_match": "@input_is_code_specification",
+          "similarity": 0.637,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_runnable_code"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_file",
+        "@output_is_shell_script"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_runnable_code",
+          "best_extracted_match": "@output_is_code_file",
+          "similarity": 0.765,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A17",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "none"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_runnable_app_spec"
+      ],
+      "extracted_predicates": [
+        "@input_is_app_description"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_runnable_app_spec",
+          "best_extracted_match": "@input_is_app_description",
+          "similarity": 0.631,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_runnable_code"
+      ],
+      "extracted_predicates": [
+        "@output_is_web_app_code"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_runnable_code",
+          "best_extracted_match": "@output_is_web_app_code",
+          "similarity": 0.691,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A17",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "interactive_project"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_runnable_app_spec"
+      ],
+      "extracted_predicates": [
+        "@input_is_code_specification",
+        "@input_is_terminal_task",
+        "@input_is_feature_description",
+        "@input_is_ui_description"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_runnable_app_spec",
+          "best_extracted_match": "@input_is_code_specification",
+          "similarity": 0.637,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_runnable_code"
+      ],
+      "extracted_predicates": [
+        "@output_is_code_file",
+        "@output_is_shell_script",
+        "@output_is_web_app_code"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_runnable_code",
+          "best_extracted_match": "@output_is_code_file",
+          "similarity": 0.765,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A18",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "code"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_ui_design"
+      ],
+      "extracted_predicates": [
+        "@input_is_app_description"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_ui_design",
+          "best_extracted_match": "@input_is_app_description",
+          "similarity": 0.567,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_ui_clone"
+      ],
+      "extracted_predicates": [
+        "@output_is_web_app_code"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_ui_clone",
+          "best_extracted_match": "@output_is_web_app_code",
+          "similarity": 0.546,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A18",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_ui_design"
+      ],
+      "extracted_predicates": [
+        "@input_is_app_description"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_ui_design",
+          "best_extracted_match": "@input_is_app_description",
+          "similarity": 0.567,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_ui_clone"
+      ],
+      "extracted_predicates": [
+        "@output_is_web_app_code"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_ui_clone",
+          "best_extracted_match": "@output_is_web_app_code",
+          "similarity": 0.546,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A18",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "code_changes",
+        "preview_state",
+        "version"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_ui_design"
+      ],
+      "extracted_predicates": [
+        "@input_is_app_description",
+        "@input_is_web_app_code"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_ui_design",
+          "best_extracted_match": "@input_is_web_app_code",
+          "similarity": 0.603,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_ui_clone"
+      ],
+      "extracted_predicates": [
+        "@output_is_web_app_code",
+        "@output_is_runnable_code"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_ui_clone",
+          "best_extracted_match": "@output_is_web_app_code",
+          "similarity": 0.546,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A19",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "response"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_feature_description",
+        "@input_is_feature_not_bugfix"
+      ],
+      "extracted_predicates": [
+        "@input_is_feature_description",
+        "@input_is_terminal_task"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_feature_description",
+          "best_extracted_match": "@input_is_feature_description",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@input_is_feature_not_bugfix",
+          "best_extracted_match": "@input_is_feature_description",
+          "similarity": 0.678,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_requirements_spec"
+      ],
+      "extracted_predicates": [
+        "@output_is_requirements_spec",
+        "@output_is_shell_script"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_requirements_spec",
+          "best_extracted_match": "@output_is_requirements_spec",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A19",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "design_document",
+        "requirements_document",
+        "task_list"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_feature_description",
+        "@input_is_feature_not_bugfix"
+      ],
+      "extracted_predicates": [
+        "@input_is_feature_description",
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_feature_description",
+          "best_extracted_match": "@input_is_feature_description",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        },
+        {
+          "gt_predicate": "@input_is_feature_not_bugfix",
+          "best_extracted_match": "@input_is_feature_description",
+          "similarity": 0.678,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_requirements_spec"
+      ],
+      "extracted_predicates": [
+        "@output_is_requirements_spec",
+        "@output_is_other"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_requirements_spec",
+          "best_extracted_match": "@output_is_requirements_spec",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A19",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "output"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_feature_description",
+        "@input_is_feature_not_bugfix"
+      ],
+      "extracted_predicates": [
+        "@input_is_github_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_feature_description",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 0.499,
+          "cleared_threshold": false
+        },
+        {
+          "gt_predicate": "@input_is_feature_not_bugfix",
+          "best_extracted_match": "@input_is_github_issue",
+          "similarity": 0.576,
+          "cleared_threshold": false
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_requirements_spec"
+      ],
+      "extracted_predicates": [
+        "@output_is_parsed_issue"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_requirements_spec",
+          "best_extracted_match": "@output_is_parsed_issue",
+          "similarity": 0.56,
+          "cleared_threshold": false
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A20",
+    "config": "S1",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "command_block"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_terminal_task"
+      ],
+      "extracted_predicates": [
+        "@input_is_terminal_task"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_terminal_task",
+          "best_extracted_match": "@input_is_terminal_task",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_shell_script"
+      ],
+      "extracted_predicates": [
+        "@output_is_shell_script"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_shell_script",
+          "best_extracted_match": "@output_is_shell_script",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A20",
+    "config": "S1S2",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [
+        "block_id",
+        "command_text",
+        "duration",
+        "exit_code",
+        "output"
+      ],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_terminal_task"
+      ],
+      "extracted_predicates": [
+        "@input_is_terminal_task"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_terminal_task",
+          "best_extracted_match": "@input_is_terminal_task",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_shell_script"
+      ],
+      "extracted_predicates": [
+        "@output_is_shell_script"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_shell_script",
+          "best_extracted_match": "@output_is_shell_script",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  },
+  {
+    "agent": "A20",
+    "config": "S1S2T",
+    "tout": {
+      "gt_properties": [],
+      "ex_properties": [],
+      "top_level_overlap": [],
+      "ex_nested_array_properties": {}
+    },
+    "pre": {
+      "gt_predicates": [
+        "@input_is_terminal_task"
+      ],
+      "extracted_predicates": [
+        "@input_is_terminal_task"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@input_is_terminal_task",
+          "best_extracted_match": "@input_is_terminal_task",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    },
+    "post": {
+      "gt_predicates": [
+        "@output_is_shell_script"
+      ],
+      "extracted_predicates": [
+        "@output_is_shell_script"
+      ],
+      "matches": [
+        {
+          "gt_predicate": "@output_is_shell_script",
+          "best_extracted_match": "@output_is_shell_script",
+          "similarity": 1.0,
+          "cleared_threshold": true
+        }
+      ]
+    }
+  }
+]

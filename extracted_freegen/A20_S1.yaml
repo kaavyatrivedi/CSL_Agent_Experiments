@@ -1,0 +1,32 @@
+contract_id: "AgentMode-v1"
+
+tin:
+  type: object
+  properties:
+    command: string
+  required: 
+    - command
+
+pre:
+  structural: "command is string"
+  semantic: 
+    - '@input_is_terminal_task'
+
+post:
+  structural: "output is string"
+  semantic:
+    - '@output_is_shell_script'
+
+tout:
+  type: object
+  properties:
+    output: string
+
+prob:
+  satisfaction_rate: 0.73
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: RESOLVE

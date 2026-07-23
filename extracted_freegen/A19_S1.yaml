@@ -1,0 +1,35 @@
+contract_id: KiroAgent-v1
+
+tin:
+  type: object
+  properties:
+    feature_idea: string
+    user_instructions: string
+  required: 
+    - feature_idea
+
+pre:
+  structural: "feature_idea != null"
+  semantic: 
+    - '@input_is_feature_description'
+
+post:
+  structural: "output != null"
+  semantic: 
+    - '@output_is_requirements_spec'
+
+tout:
+  type: object
+  properties:
+    requirements_document: string
+    design_document: string
+    implementation_plan: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONSENSUS

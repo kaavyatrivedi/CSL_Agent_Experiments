@@ -1,0 +1,38 @@
+contract_id: AI coding assistant and agent manager v4.1
+
+tin:
+  type: object
+  properties:
+    message: string
+    context: object
+    guidance_mode: string
+  required:
+    - message
+
+pre:
+  structural: message != ""
+  semantic: 
+    - '@input_is_app_description'
+    - '@input_is_web_app_code'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_web_app_code'
+    - '@output_is_runnable_code'
+
+tout:
+  type: object
+  properties: 
+    version: string
+    code_changes: string
+    preview_state: string
+
+prob:
+  satisfaction_rate: 0.6
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONCAT

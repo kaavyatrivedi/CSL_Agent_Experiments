@@ -1,0 +1,29 @@
+contract_id: Lovable_v1
+tin:
+  type: object
+  properties:
+    prompt:
+      type: string
+    images:
+      type: array
+      items:
+        type: string
+  required: [prompt]
+pre:
+  structural: prompt != ""
+  semantic: ['@input_is_app_description']
+post:
+  structural: true
+  semantic: ['@output_is_web_app_code']
+tout:
+  type: object
+  properties:
+    session_url:
+      type: string
+prob:
+  satisfaction_rate: 0.4
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONCAT

@@ -1,0 +1,41 @@
+contract_id: GithubIssueParser-v1
+
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+  required:
+    - repo
+    - problem_statement
+
+pre:
+  structural: "repo && problem_statement"
+  semantic: 
+    - '@input_is_github_issue'
+
+post:
+  structural: "output"
+  semantic: 
+    - '@output_is_parsed_issue'
+
+tout:
+  type: object
+  properties:
+    Title: string
+    Error type: string
+    Affected components: string
+    Expected behaviour: string
+    Actual behaviour: string
+    Reproduction steps: string
+    Environment: string
+    Additional context: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

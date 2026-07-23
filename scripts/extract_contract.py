@@ -16,31 +16,91 @@ from dotenv import load_dotenv
 load_dotenv()
 client = openai.OpenAI()
 
-EXTRACTION_PROMPT = '''
+EXTRACTION_PROMPT =  '''
 You are a contract extraction expert. Given documentation about an LLM agent,
 produce a CSL-Agent contract in YAML format with these exact fields:
 
 contract_id: (agent name + version)
+
 tin:
   type: object
   properties: (list all input fields with types)
   required: (list required fields)
+
 pre:
   structural: (boolean expression over input fields)
-  semantic: (list of quoted predicate strings like '@predicate_name' -- always wrap in single quotes)
+  semantic: (list of quoted predicate strings -- see closed list below)
+
 post:
   structural: (boolean expression over output fields)
-  semantic: (list of quoted predicate strings like '@predicate_name' -- always wrap in single quotes)
+  semantic: (list of quoted predicate strings -- see closed list below)
+
 tout:
   type: object
   properties: (list all output fields)
+
 prob:
   satisfaction_rate: {sat_rate}
   confidence_delta: 0.05
   min_sample_k: 30
   latency_lognormal: {{mu: 0.0, sigma: 0.0}}
+
 comp:
   type: (one of: SELECT, CONCAT, MERGE, CONSENSUS, RESOLVE)
+
+IMPORTANT -- pre.semantic and post.semantic must be chosen from the FIXED,
+CLOSED lists below. Do NOT invent new predicate names. Select every
+category that applies to this agent's input/output -- usually exactly
+one, occasionally two (e.g. an agent that both validates a patch and
+merges it would get both '@output_is_valid_patch' and
+'@output_is_merged_patch').
+
+Choose a category if the agent's documented purpose matches its
+description, or its typical input/output contains language similar to
+its keywords.
+
+PRE CATEGORIES (choose from these for pre.semantic):
+  '@input_is_github_issue'          -- issue, bug, error, fix, problem, report
+  '@input_has_file_location'        -- file, localise, localize, location, line, path
+  '@input_is_patch_and_tests'       -- verify, verification, validate, patch, test, pass
+  '@input_is_code_specification'    -- write, generate, implement, create, function, class, module, spec
+  '@input_is_file_search_query'     -- find, locate, search, relevant, files, where
+  '@input_is_code_and_instructions' -- refactor, rewrite, rename, restructure, edit, update, docstring, comment
+  '@input_is_stack_trace'           -- stack trace, traceback, exception, crash, root cause, stacktrace
+  '@input_is_multiple_patches'      -- merge, combine, conflict, patches, parallel
+  '@input_is_test_suite'            -- run tests, test suite, execute tests, test results, pytest, unittest
+  '@input_is_code_function'         -- summarise, summarize, explain, describe, what does, document
+  '@input_is_ui_description'        -- component, react, tsx, jsx, ui, interface, button, form, page
+  '@input_is_app_description'       -- web app, application, build, full stack, frontend, backend
+  '@input_is_runnable_app_spec'     -- sandbox, run, deploy, replit, executable, runnable
+  '@input_is_ui_design'             -- clone, replicate, copy, screenshot, design, mockup, looks like
+  '@input_is_feature_description'   -- spec, requirements, shall, system, feature, kiro, specification
+  '@input_is_terminal_task'         -- terminal, bash, shell, script, command, cli, warp
+
+If truly none of the above applies, use '@input_is_other'.
+
+POST CATEGORIES (choose from these for post.semantic):
+  '@output_is_localisation_result'
+  '@output_is_valid_patch'
+  '@output_preserves_test_files'
+  '@output_is_verification_result'
+  '@output_is_code_file'
+  '@output_is_file_list'
+  '@output_is_search_replace_block'
+  '@output_has_filepath_before_block'
+  '@output_is_root_cause_analysis'
+  '@output_is_merged_patch'
+  '@output_is_test_run_report'
+  '@output_is_parsed_issue'
+  '@output_is_code_summary'
+  '@output_is_react_component'
+  '@output_is_web_app_code'
+  '@output_is_runnable_code'
+  '@output_is_ui_clone'
+  '@output_is_requirements_spec'
+  '@output_is_shell_script'
+
+If truly none of the above applies, use '@output_is_other'.
 
 Return ONLY the YAML. No explanation.
 '''
@@ -121,7 +181,7 @@ def extract_contract(agent_id, use_docs=False, use_traces=False, sat_rate=0.0):
 
 if __name__ == '__main__':
     # Make sure the output directory exists instead of assuming it does.
-    os.makedirs('extracted_original', exist_ok=True)
+    os.makedirs('extracted_freegen', exist_ok=True)
 
     from scripts.compute_prob import compute_prob_field
 
@@ -137,7 +197,7 @@ if __name__ == '__main__':
         ]
 
         for cfg_name, use_docs, use_traces in configs:
-            out_path = f'extracted_original/{aid}_{cfg_name}.yaml'
+            out_path = f'extracted_freegen/{aid}_{cfg_name}.yaml'
             if os.path.exists(out_path):
                 print(f'Skipping {aid} config {cfg_name} (already extracted)')
                 continue

@@ -1,0 +1,35 @@
+contract_id: RunTestSuiteAgent_v1
+
+tin:
+  type: object
+  properties:
+    repo:
+      type: string
+    problem_statement:
+      type: string
+    test_suite:
+      type: string
+    patch:
+      type: string
+  required: [repo, problem_statement, test_suite]
+
+pre:
+  structural: true
+  semantic: ['@input_is_test_suite']
+
+post:
+  structural: true
+  semantic: ['@output_is_test_run_report']
+
+tout:
+  type: object
+  properties: {}
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

@@ -1,0 +1,45 @@
+contract_id: "SWE-agent-1.0"
+
+tin:
+  type: object
+  properties:
+    working_dir:
+      type: string
+    problem_statement:
+      type: string
+  required:
+    - working_dir
+    - problem_statement
+
+pre:
+  structural: "working_dir in tin and problem_statement in tin"
+  semantic:
+    - "@input_is_github_issue"
+    - "@input_has_file_location"
+
+post:
+  structural: "output matches format specifications"
+  semantic:
+    - "@output_is_localisation_result"
+
+tout:
+  type: object
+  properties:
+    localisation_result:
+      type: array
+      items:
+        type: object
+        properties:
+          File:
+            type: string
+          Reason:
+            type: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: "SELECT"

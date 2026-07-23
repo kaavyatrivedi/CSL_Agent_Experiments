@@ -1,0 +1,31 @@
+contract_id: VerifierAgentV1
+
+tin:
+  type: object
+  properties:
+    working_dir: string
+    problem_statement: string
+    patch: string
+  required: [working_dir, problem_statement, patch]
+
+pre:
+  structural: working_dir != null && problem_statement != null && patch != null
+  semantic: ['@input_is_github_issue', '@input_is_patch_and_tests']
+
+post:
+  structural: True
+  semantic: ['@output_is_verification_result']
+
+tout:
+  type: object
+  properties:
+    verification_result: string
+
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: RESOLVE

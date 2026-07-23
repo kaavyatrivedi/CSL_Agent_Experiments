@@ -1,0 +1,27 @@
+contract_id: ai_coding_assistant_gpt-4.1
+
+tin:
+  type: object
+  properties:
+    message: 
+      type: string
+    context: 
+      type: string
+  required: 
+    - message
+
+pre:
+  structural: "message != null"
+  semantic: 
+    - '@input_is_app_description'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_web_app_code'
+
+tout:
+  type: object
+  properties:
+    code: 
+      type: string

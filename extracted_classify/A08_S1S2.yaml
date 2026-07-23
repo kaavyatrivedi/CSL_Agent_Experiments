@@ -1,0 +1,37 @@
+contract_id: DocStringExpert1.0
+
+tin:
+  type: object
+  properties:
+    fnames:
+      type: array
+      items:
+        type: string
+    model:
+      type: string
+    instruction:
+      type: string
+  required: [fnames, model, instruction]
+
+pre:
+  structural: >-
+    (input.model != '')
+  semantic: ['@input_has_file_location']
+
+post:
+  structural: >-
+    (output != '')
+  semantic: ['@output_is_search_replace_block']
+
+tout:
+  type: object
+  properties: {}
+
+prob:
+  satisfaction_rate: 0.63
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

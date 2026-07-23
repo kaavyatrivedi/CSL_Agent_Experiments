@@ -1,0 +1,37 @@
+contract_id: Aider_v1
+
+tin:
+  type: object
+  properties:
+    fnames: 
+      type: array
+      items: 
+        type: string
+    model: 
+      type: string
+    instruction: 
+      type: string
+  required: [fnames, model, instruction]
+
+pre:
+  structural: fnames is not None and model is not None and instruction is not None
+  semantic: ['@input_is_code_and_instructions']
+
+post:
+  structural: true
+  semantic: ['@output_is_search_replace_block']
+
+tout:
+  type: object
+  properties:
+    format:
+      type: string
+    edits: 
+      type: array
+      items:
+        type: object
+        properties:
+          filepath:
+            type: string
+          content:
+            type: string

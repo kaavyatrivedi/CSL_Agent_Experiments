@@ -1,0 +1,40 @@
+contract_id: VerificationAgent_v1
+
+tin:
+  type: object
+  properties:
+    issue: string
+    patch: string
+    repo: string
+  required:
+    - issue
+    - patch
+    - repo
+
+pre:
+  structural: true
+  semantic: 
+    - '@input_is_github_issue'
+    - '@input_is_patch_and_tests'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_verification_result'
+
+tout:
+  type: object
+  properties:
+    verdict: string
+    tests_evaluated: array
+    edge_cases_missed: array
+    overall_reasoning: string
+
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONSENSUS

@@ -1,0 +1,37 @@
+contract_id: CodeSummariser-1.0
+
+tin:
+  type: object
+  properties:
+    repo:
+      type: string
+    problem_statement:
+      type: string
+    function_code:
+      type: string
+  required:
+    - repo
+    - function_code
+
+pre:
+  structural: repo != null AND function_code != null
+  semantic: ['@input_is_code_function']
+
+post:
+  structural: summary != null
+  semantic: ['@output_is_code_summary']
+
+tout:
+  type: object
+  properties:
+    summary:
+      type: string
+
+prob:
+  satisfaction_rate: 0.87
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

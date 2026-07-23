@@ -1,0 +1,39 @@
+contract_id: patch-generator-v1
+
+tin:
+  type: object
+  properties:
+    problem_statement: string
+    localised_file: string
+  required: 
+    - problem_statement
+    - localised_file
+
+pre:
+  structural: >
+    problem_statement is not None and
+    localised_file is not None
+  semantic: 
+    - '@input_is_github_issue'
+    - '@input_has_file_location'
+
+post:
+  structural: >
+    output is a valid unified diff string
+  semantic: 
+    - '@output_is_valid_patch'
+    - '@output_preserves_test_files'
+
+tout:
+  type: object
+  properties:
+    unified_diff: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONCAT

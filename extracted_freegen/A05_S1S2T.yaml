@@ -1,0 +1,35 @@
+contract_id: OpenHands_FileFinder_v1
+
+tin:
+  type: object
+  properties:
+    issue: string
+    repo: string
+  required:
+    - issue
+    - repo
+
+pre:
+  structural: true
+  semantic: 
+    - '@input_is_file_search_query'
+    - '@input_is_github_issue'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_file_list'
+
+tout:
+  type: object
+  properties:
+    result: array
+
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

@@ -1,0 +1,31 @@
+contract_id: localisation-agent-v1
+
+tin:
+  type: object
+  properties:
+    working_dir: string
+    problem_statement: string
+  required: [working_dir, problem_statement]
+
+pre:
+  structural: (working_dir != '' and problem_statement != '')
+  semantic: ['@input_is_github_issue', '@input_has_file_location']
+
+post:
+  structural: (output == None or (type(output) == list and all(type(i) == dict for i in output)))
+  semantic: ['@output_is_localisation_result']
+
+tout:
+  type: object
+  properties:
+    - File: string
+    - Reason: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

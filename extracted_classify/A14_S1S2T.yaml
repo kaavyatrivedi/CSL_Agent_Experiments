@@ -1,0 +1,37 @@
+contract_id: "CodeSummaryAgent_v1"
+
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+    function_code: string
+  required:
+    - function_code
+
+pre:
+  structural: "function_code != ''"
+  semantic: ["@input_is_code_function"]
+
+post:
+  structural: "true"
+  semantic: ["@output_is_code_summary"]
+
+tout:
+  type: object
+  properties:
+    Purpose: string
+    Inputs: string
+    Outputs: string
+    Edge_cases_handled: string
+    Calls: string
+    Notes: string
+
+prob:
+  satisfaction_rate: 0.87
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

@@ -1,0 +1,40 @@
+contract_id: localisation_agent_v1
+
+tin:
+  type: object
+  properties:
+    working_dir:
+      type: string
+    problem_statement:
+      type: string
+  required: [working_dir, problem_statement]
+
+pre:
+  structural: working_dir and problem_statement
+  semantic: ['@input_is_github_issue', '@input_has_file_location']
+
+post:
+  structural: output format contains 'LOCALISATION RESULT'
+  semantic: ['@output_is_localisation_result']
+
+tout:
+  type: object
+  properties:
+    LOCALISATION_RESULT:
+      type: array
+      items:
+        type: object
+        properties:
+          File:
+            type: string
+          Reason:
+            type: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

@@ -1,0 +1,36 @@
+contract_id: ReplitAssistant_v1
+
+tin:
+  type: object
+  properties:
+    user_query: string
+  required:
+    - user_query
+
+pre:
+  structural: user_query is not None
+  semantic: 
+    - '@input_is_code_specification'
+    - '@input_is_terminal_task'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_code_file'
+    - '@output_is_shell_script'
+
+tout:
+  type: object
+  properties:
+    proposed_file_changes: array
+    proposed_shell_commands: array
+    natural_language_response: string
+
+prob:
+  satisfaction_rate: 0.5
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

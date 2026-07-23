@@ -1,0 +1,33 @@
+contract_id: Lovable_v1
+
+tin:
+  type: object
+  properties:
+    user_input: string
+    code_context: string
+    chat_context: string
+    images: array
+    console_logs: string
+    supabase_data: object
+  required: 
+    - user_input
+    - code_context
+    - chat_context
+
+pre:
+  structural: user_input and code_context and chat_context
+  semantic: 
+    - '@input_is_app_description'
+    - '@input_is_code_and_instructions'
+
+post:
+  structural: code_output
+  semantic: 
+    - '@output_is_web_app_code'
+    - '@output_is_code_file'
+
+tout:
+  type: object
+  properties:
+    code_output: string
+    explanation: string

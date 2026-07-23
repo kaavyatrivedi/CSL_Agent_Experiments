@@ -1,0 +1,37 @@
+contract_id: AI-Coding-Assistant-4.1
+
+tin:
+  type: object
+  properties:
+    message: string
+    context: optional
+    guidance_mode: optional
+  required: 
+    - message
+
+pre:
+  structural: message is not null
+  semantic:
+    - '@input_is_app_description'
+    - '@input_is_ui_description'
+
+post:
+  structural: project is live-updated with diffs surfaced
+  semantic:
+    - '@output_is_web_app_code'
+    - '@output_is_react_component'
+
+tout:
+  type: object
+  properties:
+    live_updated_project: any
+    diffs: any
+
+prob:
+  satisfaction_rate: 0.6
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONCAT

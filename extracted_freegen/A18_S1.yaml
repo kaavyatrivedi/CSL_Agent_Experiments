@@ -1,0 +1,27 @@
+contract_id: "GPT-4.1 + AI coding assistant"
+tin:
+  type: object
+  properties:
+    query: string
+    current_state_info: object
+    images: array
+  required: [query]
+pre:
+  structural: "query != null"
+  semantic: ["@input_is_app_description"]
+post:
+  structural: "true"
+  semantic: ["@output_is_web_app_code"]
+tout:
+  type: object
+  properties:
+    solution: string
+    preview_url: string
+    logs: object
+prob:
+  satisfaction_rate: 0.6
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONSENSUS

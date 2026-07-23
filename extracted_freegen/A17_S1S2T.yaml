@@ -1,0 +1,45 @@
+contract_id: Replit_Assistant_v1
+
+tin:
+  type: object
+  properties:
+    message:
+      type: string
+    project_type:
+      type: string
+    agent_mode:
+      type: string
+    turbo:
+      type: boolean
+    high_effort:
+      type: boolean
+    plan_mode:
+      type: boolean
+  required:
+    - message
+    - agent_mode
+
+pre:
+  structural: "agent_mode == 'Power' -> turbo && project_type != null"
+  semantic:
+    - '@input_is_code_specification'
+    - '@input_is_code_and_instructions'
+
+post:
+  structural: true
+  semantic:
+    - '@output_is_web_app_code'
+    - '@output_is_runnable_code'
+
+tout:
+  type: object
+  properties: {}
+  
+prob:
+  satisfaction_rate: 0.5
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONSENSUS

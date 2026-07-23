@@ -1,0 +1,41 @@
+contract_id: IssueParserAgent_v1
+
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+  required:
+    - repo
+    - problem_statement
+
+pre:
+  structural: true
+  semantic: 
+    - '@input_is_github_issue'
+
+post:
+  structural: true
+  semantic:
+    - '@output_is_parsed_issue'
+
+tout:
+  type: object
+  properties:
+    Title: string
+    Error_type: string
+    Affected_components: string
+    Expected_behaviour: string
+    Actual_behaviour: string
+    Reproduction_steps: string
+    Environment: string
+    Additional_context: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

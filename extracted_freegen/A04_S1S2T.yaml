@@ -1,0 +1,32 @@
+contract_id: OpenHandsCodeWriter-v1
+
+tin:
+  type: object
+  properties:
+    spec: string
+  required: 
+    - spec
+
+pre:
+  structural: true
+  semantic: 
+    - '@input_is_code_specification'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_code_file'
+
+tout:
+  type: object
+  properties:
+    file_contents: string
+
+prob:
+  satisfaction_rate: 0.67
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: RESOLVE

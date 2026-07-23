@@ -1,0 +1,33 @@
+contract_id: CodeSummarisationAgent_v1
+tin:
+  type: object
+  properties:
+    repo: {type: string}
+    problem_statement: {type: string}
+    function_code: {type: string}
+  required:
+    - function_code
+pre:
+  structural: function_code != ''
+  semantic:
+    - '@input_is_code_function'
+post:
+  structural: true
+  semantic:
+    - '@output_is_code_summary'
+tout:
+  type: object
+  properties:
+    purpose: {type: string}
+    inputs: {type: array, items: {type: object, properties: {parameter_name: {type: string}, type: {type: string}, role: {type: string}}}}
+    outputs: {type: string}
+    edge_cases_handled: {type: string}
+    calls: {type: string}
+    notes: {type: string}
+prob:
+  satisfaction_rate: 0.87
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: SELECT

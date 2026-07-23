@@ -1,0 +1,58 @@
+contract_id: v0-1.0
+
+tin:
+  type: object
+  properties:
+    message: string
+    system: string
+    modelId: string
+    chatPrivacy: string
+    projectId: string
+  required:
+    - message
+
+pre:
+  structural: message is not None
+  semantic: 
+    - '@input_is_github_issue'
+
+post:
+  structural: output is not None
+  semantic:
+    - '@output_is_code_patch'
+
+tout:
+  type: object
+  properties:
+    id: string
+    webUrl: string
+    latestVersion: 
+      type: object
+      properties:
+        id: string
+        status: string
+        demoUrl: string
+        files: 
+          type: array
+          items:
+            type: object
+            properties:
+              name: string
+              content: string
+    messages: 
+      type: array
+      items:
+        type: object
+        properties:
+          role: string
+          content: string
+          finishReason: string
+
+prob:
+  satisfaction_rate: 0.83
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

@@ -1,0 +1,40 @@
+contract_id: ReplitAssistant-1.0
+
+tin:
+  type: object
+  properties:
+    message:
+      type: string
+    project_type:
+      type: string
+    agent_mode:
+      type: string
+    turbo:
+      type: boolean
+    high_effort:
+      type: boolean
+    plan_mode:
+      type: boolean
+  required:
+    - message
+    - agent_mode
+
+pre:
+  structural: "(agent_mode != 'Power' || turbo == false)"
+  semantic:
+    - '@input_is_code_specification'
+    - '@input_is_terminal_task'
+    - '@input_is_feature_description'
+    - '@input_is_ui_description'
+
+post:
+  structural: "true"
+  semantic:
+    - '@output_is_code_file'
+    - '@output_is_shell_script'
+    - '@output_is_web_app_code'
+
+tout:
+  type: object
+  properties:
+    - interactive_project

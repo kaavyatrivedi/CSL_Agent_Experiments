@@ -1,0 +1,30 @@
+contract_id: ReplitAssistant-v1
+tin:
+  type: object
+  properties:
+    user_request: string
+    codebase: object
+  required:
+    - user_request
+pre:
+  structural: user_request is not None
+  semantic: 
+    - '@input_is_code_and_instructions'
+    - '@input_is_terminal_task'
+post:
+  structural: true
+  semantic: 
+    - '@output_is_valid_patch'
+    - '@output_is_shell_script'
+tout:
+  type: object
+  properties: 
+    proposed_changes: array
+    shell_commands: array
+prob:
+  satisfaction_rate: 0.5
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONSENSUS

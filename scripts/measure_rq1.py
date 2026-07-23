@@ -1,6 +1,8 @@
 """
 Measures RQ1: extraction accuracy by field.
 
+SEARCH 'extracted' and 'excluded'. Replace with what type of prompt this is.
+
 Compares extracted contracts (extracted/AXX_{cfg}.yaml) to ground-truth
 contracts (ground_truth/AXX_contract_R1.yaml), producing numbers for
 Table 2.
@@ -243,7 +245,7 @@ def main():
             continue
 
         for cfg in CONFIGS:
-            ex_path = f'extracted/{aid}_{cfg}.yaml'
+            ex_path = f'extracted_freegen/{aid}_{cfg}.yaml'
             if not Path(ex_path).exists():
                 continue  # not yet extracted -- expected mid-run, not a failure
             try:

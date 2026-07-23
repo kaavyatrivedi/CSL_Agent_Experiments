@@ -1,0 +1,40 @@
+contract_id: Aider-001
+tin:
+  type: object
+  properties:
+    fnames:
+      type: array
+      items:
+        type: string
+    model:
+      type: string
+    instruction:
+      type: string
+  required: [fnames, model, instruction]
+pre:
+  structural: fnames.length > 0
+  semantic: ['@input_is_code_and_instructions']
+post:
+  structural: true
+  semantic: ['@output_is_search_replace_block']
+tout:
+  type: object
+  properties:
+    output_format:
+      type: string
+    structural_constraint_on_output:
+      type: boolean
+    two_stage_composition:
+      type: boolean
+    config_flags:
+      type: array
+      items:
+        type: string
+  required: [output_format, structural_constraint_on_output, two_stage_composition, config_flags]
+prob:
+  satisfaction_rate: 0.63
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: CONSENSUS

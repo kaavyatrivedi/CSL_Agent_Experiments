@@ -1,0 +1,200 @@
+[
+  {
+    "agent": "A02",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A02",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A02",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A05",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A05",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A05",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A07",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A07",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A07",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A08",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A08",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A08",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A10",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A10",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A10",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A15",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A15",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A15",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A16",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A16",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A16",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A17",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A17",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A17",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A18",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A18",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A18",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A19",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A19",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A19",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A20",
+    "config": "S1",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A20",
+    "config": "S1S2",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  },
+  {
+    "agent": "A20",
+    "config": "S1S2T",
+    "field": "tout",
+    "reason": "ground-truth tout.properties is empty (unstructured/free-form output) -- excluded from N, not scored as 0"
+  }
+]

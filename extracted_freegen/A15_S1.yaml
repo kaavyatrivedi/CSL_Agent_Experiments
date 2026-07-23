@@ -1,0 +1,40 @@
+contract_id: v0.0
+
+tin:
+  type: object
+  properties:
+    issue_description: string
+    stack_traces: array
+    function_names: array
+    file_paths: array
+  required:
+    - issue_description
+
+pre:
+  structural: true
+  semantic: 
+    - '@input_is_github_issue'
+    - '@input_is_stack_trace'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_valid_patch'
+    - '@output_is_merged_patch'
+    - '@output_is_test_run_report'
+
+tout:
+  type: object
+  properties:
+    patch: string
+    test_report: string
+    merged_code: string
+
+prob:
+  satisfaction_rate: 0.83
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

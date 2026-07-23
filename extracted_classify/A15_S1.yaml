@@ -1,0 +1,38 @@
+contract_id: v0+1.0
+
+tin:
+  type: object
+  properties:
+    issue_description: string
+    codebase_path: string
+    test_tool_available: boolean
+  required: 
+    - issue_description
+    - codebase_path
+
+pre:
+  structural: 'issue_description != "" && codebase_path != ""'
+  semantic: 
+    - '@input_is_github_issue'
+    - '@input_has_file_location'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_valid_patch'
+    - '@output_preserves_test_files'
+
+tout:
+  type: object
+  properties:
+    code_patch: string
+    debug_messages: string[]
+
+prob:
+  satisfaction_rate: 0.83
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

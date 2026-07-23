@@ -1,0 +1,31 @@
+contract_id: CodeRefactorAgent_v1
+
+tin:
+  type: object
+  properties:
+    refactor_instructions: string
+  required: 
+    - refactor_instructions
+
+pre:
+  structural: refactor_instructions is not null
+  semantic: 
+    - '@input_is_code_and_instructions'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_search_replace_block'
+
+tout:
+  type: object
+  properties: {}
+
+prob:
+  satisfaction_rate: 0.53
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

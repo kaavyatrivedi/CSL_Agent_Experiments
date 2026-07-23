@@ -1,0 +1,42 @@
+contract_id: RefactorExpert_v1
+
+tin:
+  type: object
+  properties:
+    refactor_instructions: string
+    file_paths: 
+      type: array
+      items: string
+  required: 
+    - refactor_instructions
+    - file_paths
+
+pre:
+  structural: >-
+    refactor_instructions is not None and isinstance(refactor_instructions, str)
+    and file_paths is not None and isinstance(file_paths, list)
+    and all(isinstance(fp, str) for fp in file_paths)
+  semantic: 
+    - '@input_is_code_and_instructions'
+
+post:
+  structural: >-
+    output contains search/replace operations in format specified and adheres to given instructions
+  semantic: 
+    - '@output_is_search_replace_block'
+
+tout:
+  type: object
+  properties:
+    output_blocks:
+      type: array
+      items: string
+
+prob:
+  satisfaction_rate: 0.53
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONCAT

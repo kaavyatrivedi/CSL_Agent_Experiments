@@ -1,0 +1,38 @@
+contract_id: KiroAI-1.0
+
+tin:
+  type: object
+  properties:
+    feature_idea: string
+    operating_system: string
+    current_directory: string
+    cli_command: string
+    code_snippet: string
+  required: 
+    - feature_idea
+
+pre:
+  structural: "feature_idea != null"
+  semantic: 
+    - '@input_is_feature_description'
+    - '@input_is_terminal_task'
+
+post:
+  structural: "response != null"
+  semantic: 
+    - '@output_is_requirements_spec'
+    - '@output_is_shell_script'
+
+tout:
+  type: object
+  properties:
+    response: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONSENSUS

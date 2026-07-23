@@ -1,0 +1,39 @@
+contract_id: TestSuiteParserV1
+
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+    test_suite: string
+    patch: string
+  required: [repo, problem_statement, test_suite]
+
+pre:
+  structural: repo != "" && test_suite != ""
+  semantic: ['@input_is_test_suite']
+
+post:
+  structural: tests_passed is int && tests_failed is int && tests_skipped is int && tests_unknown is int
+  semantic: ['@output_is_test_run_report']
+
+tout:
+  type: object
+  properties:
+    overall_verdict: string
+    tests_passed: integer
+    tests_failed: integer
+    tests_skipped: integer
+    tests_unknown: integer
+    results: array
+    failure_details: array
+    summary: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

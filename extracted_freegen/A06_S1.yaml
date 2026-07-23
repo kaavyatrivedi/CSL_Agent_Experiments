@@ -1,0 +1,33 @@
+contract_id: TestGen_v1
+
+tin:
+  type: object
+  properties:
+    function_or_spec: string
+  required:
+    - function_or_spec
+
+pre:
+  structural: "function_or_spec != null"
+  semantic: 
+    - '@input_is_code_specification'
+    - '@input_is_code_function'
+
+post:
+  structural: "output_file_path != null"
+  semantic:
+    - '@output_preserves_test_files'
+
+tout:
+  type: object
+  properties:
+    output_file_path: string
+
+prob:
+  satisfaction_rate: 0.8
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONCAT

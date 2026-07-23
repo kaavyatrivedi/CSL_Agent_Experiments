@@ -1,0 +1,34 @@
+contract_id: Kiro_1.0
+
+tin:
+  type: object
+  properties:
+    issue: string
+    repo: string
+  required:
+    - issue
+    - repo
+
+pre:
+  structural: (input.issue != null) and (input.repo != null)
+  semantic:
+    - '@input_is_github_issue'
+
+post:
+  structural: true
+  semantic:
+    - '@output_is_parsed_issue'
+
+tout:
+  type: object
+  properties:
+    document: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

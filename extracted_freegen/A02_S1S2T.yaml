@@ -1,0 +1,35 @@
+contract_id: "unified-diff-patch-generator-1.0"
+
+tin:
+  type: object
+  properties:
+    issue: string
+    repo: string
+  required: 
+    - issue
+    - repo
+
+pre:
+  structural: "issue in tin and repo in tin"
+  semantic: 
+    - "@input_is_github_issue"
+    - "@input_has_file_location"
+
+post:
+  structural: "type(tout) == object and 'patch' in tout"
+  semantic: 
+    - "@output_is_valid_patch"
+
+tout:
+  type: object
+  properties:
+    patch: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

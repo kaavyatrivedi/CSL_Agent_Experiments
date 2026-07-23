@@ -1,0 +1,28 @@
+contract_id: ReplitAssistant-1.0
+tin:
+  type: object
+  properties:
+    message: string
+    project_type: string
+    agent_mode: string
+    turbo: boolean
+    high_effort: boolean
+    plan_mode: boolean
+  required: [message, agent_mode]
+pre:
+  structural: "!(tin.turbo && tin.agent_mode != 'Power')"
+  semantic: ['@input_is_app_description']
+post:
+  structural: true
+  semantic: ['@output_is_web_app_code']
+tout:
+  type: object
+  properties:
+    none: string  # Placeholder, as no structured output is defined
+prob:
+  satisfaction_rate: 0.5
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE

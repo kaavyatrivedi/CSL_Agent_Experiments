@@ -1,0 +1,32 @@
+contract_id: "Aider-Edit-Formats-Scripting-1.0"
+
+tin:
+  type: object
+  properties:
+    documentation_instructions: string
+    fnames: 
+      type: array
+      items: string
+    model: string
+    instruction: string
+  required: [documentation_instructions, fnames, model, instruction]
+
+pre:
+  structural: true
+  semantic: ['@input_is_code_and_instructions']
+
+post:
+  structural: true
+  semantic: ['@output_is_search_replace_block']
+
+tout:
+  type: object
+  properties:
+    file_path: string
+    search_replace_blocks:
+      type: array
+      items:
+        type: object
+        properties:
+          search: string
+          replace: string

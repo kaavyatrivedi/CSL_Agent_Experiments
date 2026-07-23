@@ -1,0 +1,32 @@
+contract_id: MergeAgent_v1
+
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+    patch_a: string
+    patch_b: string
+  required: [repo, patch_a, patch_b]
+
+pre:
+  structural: "repo && patch_a && patch_b"
+  semantic: ['@input_is_multiple_patches']
+
+post:
+  structural: "output.includes('@@')"
+  semantic: ['@output_is_merged_patch']
+
+tout:
+  type: object
+  properties:
+    output: string
+
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: MERGE

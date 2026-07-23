@@ -1,0 +1,29 @@
+contract_id: AgentMode1.0
+
+tin:
+  type: object
+  properties:
+    issue: string
+    repo: string
+  required: [issue, repo]
+
+pre:
+  structural: true
+  semantic: ['@input_is_terminal_task']
+
+post:
+  structural: true
+  semantic: ['@output_is_shell_script']
+
+tout:
+  type: object
+  properties: {}
+
+prob:
+  satisfaction_rate: 0.73
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: RESOLVE

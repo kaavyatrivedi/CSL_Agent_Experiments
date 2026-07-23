@@ -1,0 +1,33 @@
+contract_id: ReplitAssistant_v1
+
+tin:
+  type: object
+  properties:
+    message: string
+    project_type: string
+    agent_mode: string
+    turbo: boolean
+    high_effort: boolean
+    plan_mode: boolean
+  required: [message, agent_mode]
+
+pre:
+  structural: "(agent_mode != 'Power') OR (agent_mode == 'Power' AND turbo implies (plan_tier == 'Pro' OR plan_tier == 'Enterprise'))"
+  semantic: ['@input_is_app_description']
+
+post:
+  structural: "true"
+  semantic: ['@output_is_runnable_code']
+
+tout:
+  type: object
+  properties: {}
+  
+prob:
+  satisfaction_rate: 0.5
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONCAT

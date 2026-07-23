@@ -1,0 +1,39 @@
+contract_id: GitHubIssueParserAgent_v1
+
+tin:
+  type: object
+  properties:
+    repo: string
+    problem_statement: string
+  required:
+    - repo
+    - problem_statement
+
+pre:
+  structural: "repo && problem_statement"
+  semantic: ['@input_is_github_issue']
+
+post:
+  structural: "title && error_type && affected_components && expected_behaviour && actual_behaviour && reproduction_steps && environment && additional_context"
+  semantic: ['@output_is_parsed_issue']
+
+tout:
+  type: object
+  properties:
+    title: string
+    error_type: string
+    affected_components: string
+    expected_behaviour: string
+    actual_behaviour: string
+    reproduction_steps: string
+    environment: string
+    additional_context: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

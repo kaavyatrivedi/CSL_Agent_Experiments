@@ -1,0 +1,83 @@
+contract_id: v0-1.0
+
+tin:
+  type: object
+  properties:
+    type:
+      type: string
+    files:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          content:
+            type: string
+    repo:
+      type: object
+      properties:
+        url:
+          type: string
+    lockFiles:
+      type: boolean
+  required:
+    - type
+
+pre:
+  structural: "type == 'files' implies files is defined and files is array"
+  semantic: 
+    - '@input_is_file_location'
+    - '@input_is_code_and_instructions'
+
+post:
+  structural: "output contains key 'messages'"
+  semantic: 
+    - '@output_is_code_file'
+    - '@output_preserves_test_files'
+
+tout:
+  type: object
+  properties:
+    id:
+      type: string
+    webUrl:
+      type: string
+    latestVersion:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        demoUrl:
+          type: string
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              content:
+                type: string
+    messages:
+      type: array
+      items:
+        type: object
+        properties:
+          role:
+            type: string
+          content:
+            type: string
+          finishReason:
+            type: string
+
+prob:
+  satisfaction_rate: 0.83
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: MERGE

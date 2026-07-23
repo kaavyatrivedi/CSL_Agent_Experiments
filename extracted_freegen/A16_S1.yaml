@@ -1,0 +1,37 @@
+contract_id: Lovable-v1
+
+tin:
+  type: object
+  properties:
+    code: string
+    query: string
+  required:
+    - code
+    - query
+
+pre:
+  structural: code is not null and query is not null
+  semantic:
+    - '@input_is_app_description'
+    - '@input_is_ui_description'
+
+post:
+  structural: True
+  semantic:
+    - '@output_is_web_app_code'
+    - '@output_is_react_component'
+
+tout:
+  type: object
+  properties:
+    code: string
+    preview: url
+
+prob:
+  satisfaction_rate: 0.4
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONCAT

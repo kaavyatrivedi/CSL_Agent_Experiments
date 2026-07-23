@@ -1,0 +1,46 @@
+contract_id: v0+debugging-bug-reproduction
+
+tin:
+  type: object
+  properties:
+    issue: string
+    repo: string
+  required:
+    - issue
+    - repo
+
+pre:
+  structural: issue != "" && repo != ""
+  semantic: 
+    - '@input_is_github_issue'
+    - '@input_has_file_location'
+
+post:
+  structural: id != "" && webUrl != "" && latestVersion != ""
+  semantic: 
+    - '@output_is_valid_patch'
+    - '@output_is_root_cause_analysis'
+    - '@output_preserves_test_files'
+
+tout:
+  type: object
+  properties:
+    id: string
+    webUrl: string
+    latestVersion:
+      type: object
+      properties:
+        id: string
+        status: string
+        demoUrl: string
+        files: array
+    messages: array
+
+prob:
+  satisfaction_rate: 0.83
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: RESOLVE

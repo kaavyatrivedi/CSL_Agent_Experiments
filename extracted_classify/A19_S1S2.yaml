@@ -1,0 +1,38 @@
+contract_id: Kiro+v1
+
+tin:
+  type: object
+  properties:
+    work_type: string
+    feature_idea: string
+  required:
+    - work_type
+    - feature_idea
+
+pre:
+  structural: "work_type in ['Feature', 'Bug']"
+  semantic:
+    - '@input_is_feature_description'
+    - '@input_is_github_issue'
+
+post:
+  structural: true
+  semantic:
+    - '@output_is_requirements_spec'
+    - '@output_is_other'
+
+tout:
+  type: object
+  properties:
+    requirements_document: string
+    design_document: string
+    task_list: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: CONSENSUS

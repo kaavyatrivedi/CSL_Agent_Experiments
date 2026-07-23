@@ -1,0 +1,40 @@
+contract_id: "LocalisationAgentV1"
+
+tin:
+  type: object
+  properties:
+    issue: string
+    repo: string
+  required:
+    - issue
+    - repo
+
+pre:
+  structural: true
+  semantic: 
+    - '@input_is_github_issue'
+
+post:
+  structural: true
+  semantic: 
+    - '@output_is_localisation_result'
+
+tout:
+  type: object
+  properties:
+    localisation_result: 
+      type: array
+      items:
+        type: object
+        properties:
+          File: string
+          Reason: string
+
+prob:
+  satisfaction_rate: 1.0
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: SELECT

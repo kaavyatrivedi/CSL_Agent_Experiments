@@ -1,0 +1,42 @@
+contract_id: AgentMode-v1
+
+tin:
+  type: object
+  properties:
+    conversation: 
+      type: string
+    shell_command:
+      type: string
+    context:
+      type: object
+  required: 
+    - conversation
+
+pre:
+  structural: "conversation != null"
+  semantic: 
+    - '@input_is_terminal_task'
+
+post:
+  structural: "output.contains('block')"
+  semantic: 
+    - '@output_is_shell_script'
+
+tout:
+  type: object
+  properties:
+    block:
+      type: object
+    exit_code:
+      type: integer
+    duration:
+      type: string
+
+prob:
+  satisfaction_rate: 0.73
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+
+comp:
+  type: RESOLVE

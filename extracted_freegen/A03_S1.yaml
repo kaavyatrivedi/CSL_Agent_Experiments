@@ -1,0 +1,30 @@
+contract_id: PatchVerificationAgent_v1
+tin:
+  type: object
+  properties:
+    working_dir:
+      type: string
+    problem_statement:
+      type: string
+    patch:
+      type: string
+  required:
+    - working_dir
+    - problem_statement
+    - patch
+pre:
+  structural: true
+  semantic: 
+    - '@input_is_github_issue'
+    - '@input_is_patch_and_tests'
+post:
+  structural: true
+  semantic: 
+    - '@output_is_verification_result'
+prob:
+  satisfaction_rate: 0.93
+  confidence_delta: 0.05
+  min_sample_k: 30
+  latency_lognormal: {mu: 0.0, sigma: 0.0}
+comp:
+  type: RESOLVE
